@@ -1,0 +1,29 @@
+/*------------------------------------*\
+  $GENERAL
+\*------------------------------------*/
+
+/**
+ * Better handling of margins and padding. As per:
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ */
+*,
+*:before,
+*:after {
+    @include box-sizing(border-box);
+}
+
+
+html {
+  min-height: 100%;
+  overflow-y: scroll;
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: $dark;
+}
+
+
+/**
+ * Always set a background color
+ */
+body {
+  background-color: $light;
+}

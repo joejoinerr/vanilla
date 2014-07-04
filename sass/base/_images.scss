@@ -1,0 +1,19 @@
+/*------------------------------------*\
+  $IMAGES
+\*------------------------------------*/
+
+/**
+ * Fluid width, responsive images
+ */
+img {
+  max-width: 100%;
+}
+
+
+/**
+ * Don't flow image dimensions if you specify a height or width in the HTML
+ */
+img[width],
+img[height] {
+  max-width: none;
+}

@@ -1,0 +1,42 @@
+/*------------------------------------*\
+  $BUTTONS
+\*------------------------------------*/
+
+/**
+ *  1. Reset link styles to make way for button styles.
+ *  2. Reset `<button>` element defaults.
+ *  3. Disallow text highlighting.
+ *  4. Better box model than `inline`.
+ *  5. Line buttons up better together and with other elements.
+ *  6. Give the text some space.
+ *  7. Inherit font from the container.
+ *  8. Format the button's text.
+ *  9. Unset browser default focus style.
+ * 10. More than one button next to each other should be spaced apart.
+ */
+.btn {
+  @extend %plain-link;                            /* [1] */
+  @include appearance(none);                      /* [2] */
+  @include user-select(none);                     /* [3] */
+
+  display: inline-block;                          /* [4] */
+  vertical-align: middle;                         /* [5] */
+  padding: $half-spacing-unit $base-spacing-unit; /* [6] */
+//border: 0;                                      /* [2] */
+  margin: 0;                                      /* [2] */
+  cursor: pointer;                                /* [2] */
+
+  font-family: inherit;                           /* [7] */
+  line-height: 1.1;                               /* [8] */
+  text-align: center;                             /* [8] */
+  white-space: nowrap;                            /* [8] */
+
+  &:hover,
+  &:focus {
+    outline: none;                                /* [9] */
+  }
+
+  & + & {
+    margin-left: $half-spacing-unit;
+  }
+}

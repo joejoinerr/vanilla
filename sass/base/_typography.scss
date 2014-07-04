@@ -1,0 +1,108 @@
+/*------------------------------------*\
+  $TYPOGRAPHY
+\*------------------------------------*/
+
+/**
+ * Headings
+ *
+ * Heading definitions also include a class name to apply heading styles to
+ * other elements, or even other headings.
+ */
+#{headings(all)} {
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1,
+.alpha {
+  font-size: $h1;
+}
+
+h2,
+.beta {
+  font-size: $h1;
+}
+
+h3,
+.gamma {
+  font-size: $h1;
+}
+
+h4,
+.delta {
+  font-size: $h1;
+}
+
+h5,
+.epsilon {
+  font-size: $h1;
+}
+
+h6,
+.zeta {
+  font-size: $h1;
+}
+
+
+/**
+ * Extra-huge text
+ */
+.giga {
+  font-size: $giga;
+}
+.mega {
+  font-size: $mega;
+}
+.kilo {
+  font-size: $kilo;
+}
+
+
+/**
+ * Smallprint and other tiny type
+ */
+small,
+.milli {
+  font-size: $milli;
+}
+
+.micro {
+  font-size: $micro;
+}
+
+
+/**
+ * Quotes
+ */
+blockquote {
+  padding-left: $base-spacing-unit;
+  border-left: 3px solid $brand;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+
+/**
+ * Define custom text-selection colors and remove shadows
+ */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+
+/**
+ * Links
+ *
+ * Override these styles with `.plain-link` in module/_plain.scss.
+ */
+a {
+  border-bottom: 1px solid;
+  color: $brand;
+  text-decoration: none;
+}

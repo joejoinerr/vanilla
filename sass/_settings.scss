@@ -1,0 +1,118 @@
+/*------------------------------------*\
+  $SETTINGS
+\*------------------------------------*/
+
+/**
+ * Base project settings live in here
+ */
+
+
+/**
+ * General
+ */
+$legacy-support-for-ie: false;
+$border-box-sizing: true;
+
+
+/**
+ * Base typography
+ */
+$base-font-size: 1em;
+$base-line-height: 1.5;
+$base-font-family: sans-serif;
+
+
+/**
+ * Modular Scale
+ *
+ * Set some defaults for font sizing using the modular scale as per:
+ * http://alistapart.com/article/more-meaningful-typography
+ *
+ * Calculate with http://modularscale.com/
+ *
+ */
+$ms-base: $base-font-size; // can contain multiple values
+
+
+/**
+ * Baked-in ratio variables can be found here:
+ * https://github.com/Team-Sass/modular-scale#ratios
+ */
+$ms-ratio: $augmented-fourth;
+
+
+/**
+ * Heading font sizes
+ *
+ * 1. Extra large text classes
+ * 2. Extra small text classes
+ */
+$giga:           ms(8); /* [1] */
+$mega:           ms(7); /* [1] */
+$kilo:           ms(6); /* [1] */
+
+$h1:             ms(5); // .alpha
+$h2:             ms(4); // .beta
+$h3:             ms(3); // .gamma
+$h4:             ms(2); // .delta
+$h5:             ms(1); // .epsilon
+$h6:             ms(0); // .zeta
+
+$h1-line-height: $base-line-height;
+$h2-line-height: $base-line-height;
+$h3-line-height: $base-line-height;
+$h4-line-height: $base-line-height;
+$h5-line-height: $base-line-height;
+$h6-line-height: $base-line-height;
+
+$milli:          ms(-1); /* [2] */
+$micro:          ms(-2); /* [2] */
+
+
+
+/**
+ * Layout is achieved using the Susy (v1.x) grid system
+ *
+ * 1. Columns at smallest width
+ * 2. Set breakpoints and no. of columns at these breakpoints.
+ *
+ * Reset column width inside media queries with:
+ *
+   .container {
+     @include set-container-width;
+   }
+ *
+ */
+$total-columns: 12; /* [1] */
+$column-width:  4em;
+$gutter-width:  1em;
+$grid-padding:  $gutter-width;
+
+$break-mid:   32em 12; /* [2] */
+$break-large: 46em 12; /* [2] */
+
+
+/**
+ * Vertical rhythm units
+ */
+$base-spacing-unit: $base-line-height * 1em;
+$half-spacing-unit: $base-spacing-unit / 2;
+$rem-spacing-unit: $base-line-height * 1rem;
+
+
+/**
+ * Basline grids for vertical rhythm
+ *
+ * 1. Set a better color for the grid lines.
+ * 2. Show/hide all baseline grids
+ */
+$grid-background-baseline-color: #ccc; /* [1] */
+$show-baseline-grid-backgrounds: true; /* [2] */
+
+
+/**
+ * Colors
+ */
+$dark:  #222;
+$light: #fff;
+$brand: #f00;

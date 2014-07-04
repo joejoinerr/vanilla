@@ -1,0 +1,31 @@
+/*------------------------------------*\
+  $PLAIN ELEMENTS
+\*------------------------------------*/
+
+/**
+ * Remove the default styling from elements with the relevant class attached
+ */
+
+
+/**
+ * Plain list
+ *
+ * Remove bullets and align flush with content
+ */
+.plain-list,
+%plain-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+
+/**
+ * Plain link
+ *
+ * Override the link styles found in base/_paragraph.scss here
+ */
+.plain-link,
+%plain-link {
+  border-bottom: 0;
+  color: inherit;
+}

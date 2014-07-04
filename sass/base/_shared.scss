@@ -1,0 +1,40 @@
+/*------------------------------------*\
+  $SHARED
+\*------------------------------------*/
+
+/**
+ * Styles here are shared by a number of different elements
+ */
+
+
+/**
+ * Consistent spacing for vertical rhythm
+ */
+#{headings(all)},
+p,
+ul,
+ol,
+dl,
+blockquote,
+table,
+fieldset,
+figure,
+pre,
+hr,
+%spaced-block {
+  margin-top: 0;
+  margin-bottom: $rem-spacing-unit;
+}
+
+
+/**
+ * Remove the gap between media elements and the bottom of their containers:
+ * h5bp.com/i/440
+ */
+img,
+canvas,
+svg,
+audio,
+video {
+  vertical-align: middle;
+}

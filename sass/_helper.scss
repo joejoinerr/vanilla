@@ -1,0 +1,14 @@
+/*------------------------------------*\
+  $HELPER
+\*------------------------------------*/
+
+/**
+ * Micro Clearfix:
+ * Supports IE8 and above
+ */
+.clearfix:after,
+%clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
