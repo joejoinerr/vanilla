@@ -25,5 +25,6 @@ html {
  * Always set a background color
  */
 body {
+  @include baseline-grid-background;
   background-color: $light;
 }
