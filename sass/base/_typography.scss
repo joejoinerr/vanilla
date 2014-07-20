@@ -56,8 +56,7 @@ small, .milli { font-size: $milli; }
 
 /**
  * Links
- *
- * Override these styles with `.plain-link` in module/_plain.scss.
+ * NOTE: Override these styles with `.plain-link` in module/_plain.scss.
  */
 a {
   border-bottom: 1px solid;
