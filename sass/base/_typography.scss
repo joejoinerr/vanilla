@@ -7,10 +7,14 @@
  *
  * Heading definitions also include a class name to apply heading styles to
  * other elements, or even other headings.
+ * NOTE: Use `text-rendering` with caution - http://goo.gl/hNVLXT
  */
 #{headings(all)} {
+  margin-top: 0;
+  margin-bottom: $half-spacing-unit;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
