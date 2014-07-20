@@ -3,8 +3,7 @@
 \*------------------------------------*/
 
 /**
- * Better handling of margins and padding. As per:
- * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * Better handling of margins and padding - http://goo.gl/3ed2H
  */
 *,
 *:before,
@@ -22,9 +21,9 @@ html {
 
 
 /**
- * Always set a background color
+ * 1. Always set a default background color
  */
 body {
   @include baseline-grid-background;
-  background-color: $background-color;
+  background-color: $background-color; /* [1] */
 }
