@@ -17,62 +17,27 @@
   text-rendering: optimizeLegibility;
 }
 
-h1,
-.alpha {
-  font-size: $h1;
-}
-
-h2,
-.beta {
-  font-size: $h2;
-}
-
-h3,
-.gamma {
-  font-size: $h3;
-}
-
-h4,
-.delta {
-  font-size: $h4;
-}
-
-h5,
-.epsilon {
-  font-size: $h5;
-}
-
-h6,
-.zeta {
-  font-size: $h6;
-}
+h1, .alpha   { font-size: $h1; }
+h2, .beta    { font-size: $h2; }
+h3, .gamma   { font-size: $h3; }
+h4, .delta   { font-size: $h4; }
+h5, .epsilon { font-size: $h5; }
+h6, .zeta    { font-size: $h6; }
 
 
 /**
  * Extra-huge text
  */
-.giga {
-  font-size: $giga;
-}
-.mega {
-  font-size: $mega;
-}
-.kilo {
-  font-size: $kilo;
-}
+.giga { font-size: $giga; }
+.mega { font-size: $mega; }
+.kilo { font-size: $kilo; }
 
 
 /**
  * Smallprint and other tiny type
  */
-small,
-.milli {
-  font-size: $milli;
-}
-
-.micro {
-  font-size: $micro;
-}
+small, .milli { font-size: $milli; }
+.micro        { font-size: $micro; }
 
 
 /**
