@@ -41,17 +41,6 @@ small, .milli { font-size: $milli; }
 
 
 /**
- * Quotes
- */
-blockquote {
-  padding-left: $base-spacing-unit;
-  border-left: 3px solid $brand;
-  margin-right: 0;
-  margin-left: 0;
-}
-
-
-/**
  * Define custom text-selection colors and remove shadows
  */
 ::-moz-selection {
