@@ -2,21 +2,22 @@
   $GENERAL
 \*------------------------------------*/
 
+html {
+  box-sizing: border-box;
+  overflow-y: scroll;
+  min-height: 100%;
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: $text-color;
+}
+
+
 /**
  * Better handling of margins and padding - http://goo.gl/3ed2H
  */
 *,
 *:before,
 *:after {
-    @include box-sizing(border-box);
-}
-
-
-html {
-  overflow-y: scroll;
-  min-height: 100%;
-  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
-  color: $text-color;
+    box-sizing: inherit;
 }
 
 
