@@ -1,0 +1,20 @@
+{
+  "name": "vanilla",
+  "version": "1.0.0",
+  "homepage": "https://github.com/joejoinerr/vanilla",
+  "authors": [
+    "Joe Joiner <08joejoi@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "susy": "~2.2.5"
+  }
+}
