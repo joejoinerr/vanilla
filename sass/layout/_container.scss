@@ -4,4 +4,6 @@
 
 .container {
   @include container;
+  padding-right: $space;
+  padding-left: $space;
 }
