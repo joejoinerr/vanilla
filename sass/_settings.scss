@@ -1,122 +1,93 @@
-/*------------------------------------*\
-  $SETTINGS
-\*------------------------------------*/
+// -----------------------------------*\
+// #SETTINGS
+// -----------------------------------*/
 
-/**
- * Base project settings live in here
- */
-
-
-/**
- * General
- */
-$legacy-support-for-ie: false;
-$border-box-sizing: true;
+// External settings imports
+@import "settings.color";
 
 
-/**
- * Base typography
- */
-$base-font-size: 1em;
+//
+// Base typography configuration
+// 1. A setting of 100% for the body font size will cement a 16px default.
+//
+
+$base-font-size: 100%; // [1]
 $base-line-height: 1.5;
 $base-font-family: sans-serif;
 
 
-/**
- * Modular Scale
- *
- * Set some defaults for font sizing using the modular scale as per:
- * http://alistapart.com/article/more-meaningful-typography
- *
- * Calculate with http://modularscale.com/
- *
- */
-$ms-base: $base-font-size; // can contain multiple values
+// Font sizes are set using the Modular Scale Sass plugin for improved
+// typography.
+// Typographic scale can be calculated using: http://modularscale.com/
+//
+// 1. Base value for the typographic scale. Should ordinarily be left at 1em.
+// 2. Ratio for the multiples on the typographic scale. A list of ratio
+//    variables can be found here:
+//    https://github.com/modularscale/modular-scale#ratios
+
+$ms-base: 1em; // [1]
+$ms-ratio: $augmented-fourth; // [2]
 
 
-/**
- * Baked-in ratio variables can be found here:
- * https://github.com/Team-Sass/modular-scale#ratios
- */
-$ms-ratio: $augmented-fourth;
+// Font sizes
+// 1. Extra large text classes
+// 2. Heading font sizes
+// 3. Extra small text classes
+// 4. Default line height for headings
+// 5. Use these variables in base/_typography.scss to override the default
+//    heading line-height
+
+$giga:   ms(7);                        // [1]
+$mega:   ms(6);                        // [1]
+$kilo:   ms(5);                        // [1]
+
+$h1:     ms(4);                        // [2]
+$h2:     ms(3);                        // [2]
+$h3:     ms(2);                        // [2]
+$h4:     ms(1);                        // [2]
+$h5:     ms(0);                        // [2]
+$h6:     ms(0);                        // [2]
+
+$milli: ms(-1);                        // [3]
+$micro: ms(-2);                        // [3]
+
+$heading-line-height: 1.1;             // [4]
+
+$h1-line-height: $heading-line-height; // [5]
+$h2-line-height: $heading-line-height; // [5]
+$h3-line-height: $heading-line-height; // [5]
+$h4-line-height: $heading-line-height; // [5]
+$h5-line-height: $heading-line-height; // [5]
+$h6-line-height: $heading-line-height; // [5]
 
 
-/**
- * Heading font sizes
- *
- * 1. Extra large text classes
- * 2. Extra small text classes
- */
-$giga:           ms(8); /* [1] */
-$mega:           ms(7); /* [1] */
-$kilo:           ms(6); /* [1] */
+// Styling for links
+//
+// 1. Possible options are `underline` (default), `border`, or `none`
 
-$h1:             ms(5); // .alpha
-$h2:             ms(4); // .beta
-$h3:             ms(3); // .gamma
-$h4:             ms(2); // .delta
-$h5:             ms(1); // .epsilon
-$h6:             ms(0); // .zeta
-
-$h1-line-height: $base-line-height;
-$h2-line-height: $base-line-height;
-$h3-line-height: $base-line-height;
-$h4-line-height: $base-line-height;
-$h5-line-height: $base-line-height;
-$h6-line-height: $base-line-height;
-
-$milli:          ms(-1); /* [2] */
-$micro:          ms(-2); /* [2] */
+$link-color: hsl(240, 100%, 50%);
+$link-underline: underline; // [1]
+$link-hover-underline: none;
 
 
+// Vertical rhythm units
 
-/**
- * Layout is achieved using the Susy (v1.x) grid system
- *
- * 1. Columns at smallest width
- * 2. Set breakpoints and no. of columns at these breakpoints.
- *
- * Reset column width inside media queries with:
- *
-   .container {
-     @include set-container-width;
-   }
- *
- */
-$total-columns: 12; /* [1] */
-$column-width:  4em;
-$gutter-width:  1em;
-$grid-padding:  $gutter-width;
-
-$break-mid:   32em 12; /* [2] */
-$break-large: 46em 12; /* [2] */
+$space: $base-line-height * 1rem;
+$half-space: $space / 2;
+$em-space: $base-line-height * 1em;
 
 
-/**
- * Vertical rhythm units
- */
-$base-spacing-unit: $base-line-height * 1em;
-$half-spacing-unit: $base-spacing-unit / 2;
-$rem-spacing-unit: $base-line-height * 1rem;
+// Layout is achieved using the Susy grid system. The options are available at:
+// http://susy.readthedocs.org/en/latest/settings/
+//
+// 1. Breakpoints for mobile-first design
 
+$susy: (
+  global-box-sizing: border-box,
+  columns: 12,
+  column-width: 4em,
+  gutters: .25
+);
 
-/**
- * Basline grids for vertical rhythm
- *
- * 1. Set a better color for the grid lines.
- * 2. Show/hide all baseline grids
- */
-$grid-background-baseline-color: #ccc; /* [1] */
-$show-baseline-grid-backgrounds: false; /* [2] */
-
-
-/**
- * Colors
- */
-$dark:  #222;
-$light: #fff;
-$brand: #f00;
-
-$background-color: $light;
-$text-color: $dark;
-$link-color: $brand;
+$break-mid:   32em; // [1]
+$break-large: 46em; // [1]

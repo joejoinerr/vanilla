@@ -1,6 +1,23 @@
 /*------------------------------------*\
-  $TYPOGRAPHY
+  #TYPOGRAPHY
 \*------------------------------------*/
+
+/**
+ * Define custom text-selection colors and remove shadows.
+ */
+
+$selection-color: #b3d4fc;
+
+::-moz-selection {
+  background: $selection-color;
+  text-shadow: none;
+}
+
+::selection {
+  background: $selection-color;
+  text-shadow: none;
+}
+
 
 /**
  * Headings
@@ -9,11 +26,17 @@
  * other elements, or even other headings.
  * NOTE: Use `text-rendering` with caution - http://goo.gl/hNVLXT
  */
-#{headings(all)} {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0;
-  margin-bottom: $half-spacing-unit;
+  margin-bottom: $half-space;
   font-weight: 700;
-  line-height: normal;
+  line-height: $heading-line-height;
   text-rendering: optimizeLegibility;
 }
 
@@ -26,40 +49,44 @@ h6, .zeta    { font-size: $h6; }
 
 
 /**
- * Extra-huge text
+ * Extra-huge text.
  */
+
 .giga { font-size: $giga; }
 .mega { font-size: $mega; }
 .kilo { font-size: $kilo; }
 
 
 /**
- * Smallprint and other tiny type
+ * Smallprint and other tiny type.
  */
+
 small, .milli { font-size: $milli; }
 .micro        { font-size: $micro; }
-
-
-/**
- * Define custom text-selection colors and remove shadows
- */
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
 
 
 /**
  * Links
  * NOTE: Override these styles with `.plain-link` in module/_plain.scss.
  */
+
+@mixin link-underline {
+  @if $link-underline == "border" {
+    border-bottom: 1px solid;
+    text-decoration: none;
+  } @else if $link-underline == "underline" {
+    text-decoration: underline;
+  } @else {
+    text-decoration: none;
+  }
+}
+
 a {
-  border-bottom: 1px solid;
+  @include link-underline;
   color: $link-color;
-  text-decoration: none;
+
+  // &:hover,
+  // &:focus {
+
+  // }
 }

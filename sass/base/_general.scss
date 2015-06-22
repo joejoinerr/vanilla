@@ -1,30 +1,28 @@
 /*------------------------------------*\
-  $GENERAL
+  #GENERAL
 \*------------------------------------*/
 
+/**
+ * 1. Improved default box model - http://goo.gl/3ed2H
+ * 2. Force scrollbars on all browsers.
+ * 3. Content should fill entire browser window.
+ */
+
 html {
-  box-sizing: border-box;
-  overflow-y: scroll;
-  min-height: 100%;
+  box-sizing: border-box; /* [1] */
+  overflow-y: scroll; /* [2] */
+  height: 100%; /* [3] */
   font: #{$base-font-size}/#{$base-line-height} $base-font-family;
-  color: $text-color;
+  color: palette(dark);
 }
 
-
-/**
- * Better handling of margins and padding - http://goo.gl/3ed2H
- */
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+    box-sizing: inherit; /* [1] */
 }
 
-
-/**
- * 1. Always set a default background color
- */
 body {
-  @include baseline-grid-background;
-  background-color: $background-color; /* [1] */
+  min-height: 100%; /* [3] */
+  background-color: palette(light); /* [1] */
 }

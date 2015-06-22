@@ -9,22 +9,32 @@ module.exports = function(grunt) {
     // LibSass preprocessing
     sass: {
       options: {
-        sourceMap: true
+        includePaths: ["bower_components"],
+        precision: 5,
       },
       dev: {
-        files: {
-          "css/main.css": "sass/main.scss"
-        },
+        files: [{
+          expand: true,
+          cwd: "sass",
+          src: ["**/*.scss"],
+          dest: "css",
+          ext: ".css"
+        }],
         options: {
-          outputStyle: "expanded"
+          outputStyle: "expanded",
+          sourceMap: true
         }
       },
       dist: {
-        files: {
-          "css/main.css": "sass/main.scss"
-        },
+        files: [{
+          expand: true,
+          cwd: "sass",
+          src: ["**/*.scss"],
+          dest: "css",
+          ext: ".min.css"
+        }],
         options: {
-          outputStyle: "compressed"
+          outputStyle: "compressed",
         }
       }
     },
@@ -82,12 +92,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-sass");
   grunt.loadNpmTasks("grunt-contrib-csslint");
   grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-connect");
+  grunt.loadNpmTasks("grunt-contrib-watch");
 
   // Run tasks
   grunt.registerTask("default", ["sass:dev", "connect", "watch"]);
-  grunt.registerTask("build", ["sass:dist", "uglify"]);
-  grunt.registerTask("lint", ["sass:dist", "csslint"]);
+  grunt.registerTask("build", ["sass:dev", "uglify"]);
+  grunt.registerTask("lint", ["sass:dev", "csslint"]);
+  grunt.registerTask("dist", ["sass:dist", "uglify"]);
 
 };

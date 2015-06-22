@@ -1,5 +1,5 @@
 /*------------------------------------*\
-  $MEDIA
+  #MEDIA
 \*------------------------------------*/
 
 /**
@@ -7,19 +7,35 @@
  * The media object is a common layout in modern design: an image or other
  * media alongside a body of text.
  *
- * 1. Put the media alongside the text and give it some space.
- * 2. Ensure the wrapper and body text contain the elements within.
+ * 1. Ensure the wrapper and body text contain the elements within.
  */
+
 .media {
   @extend %spaced-block;
-  @extend %clearfix; /* [2] */
+  @extend %clearfix; /* [1] */
 }
 
 .media__visual {
-  float: left; /* [1] */
-  margin-right: $base-spacing-unit; /* [1] */
+  float: left;
+  margin-right: $half-space;
 }
 
 .media__body {
-  @extend %clearfix; /* [2] */
+  overflow: hidden; /* [1] */
+  display: block;
+
+  &,
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/**
+ * Reversed media has the visual on the right instead of the left.
+ */
+
+.media--rev .media__visual {
+  float: right;
+  margin-left: $half-space;
 }

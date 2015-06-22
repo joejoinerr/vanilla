@@ -1,0 +1,24 @@
+// ------------------------------------*\
+// #COLOR PALETTES
+// ------------------------------------*/
+
+// Colors are managed using a custom palette() function. Initial colors are
+// declared with `base`, then variations on tint and shade can be included
+// below. All colors should be in the HSLa format for ease of customisation.
+// For calculation of HSLa values use http://mothereffinghsl.com
+
+$palettes: (
+  dark: (
+    base: hsl(0, 0%, 13%)
+  ),
+  light: (
+    base: hsl(0, 0%, 100%)
+  )
+);
+
+
+// Palette function to create the palette() syntax from the above map.
+
+@function palette($palette, $tone: "base") {
+  @return map-get(map-get($palettes, $palette), $tone);
+}

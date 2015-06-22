@@ -1,15 +1,11 @@
 /*------------------------------------*\
-  $SHARED
+  #SHARED
 \*------------------------------------*/
 
 /**
- * Styles here are shared by a number of different elements
+ * Consistent spacing for vertical rhythm.
  */
 
-
-/**
- * Consistent spacing for vertical rhythm
- */
 p,
 ul,
 ol,
@@ -20,9 +16,10 @@ fieldset,
 figure,
 pre,
 hr,
+.spaced-block,
 %spaced-block {
   margin-top: 0;
-  margin-bottom: $rem-spacing-unit;
+  margin-bottom: $space;
 }
 
 
@@ -30,6 +27,7 @@ hr,
  * Remove the gap between media elements and the bottom of their containers:
  * h5bp.com/i/440
  */
+
 img,
 canvas,
 svg,

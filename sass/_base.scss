@@ -1,11 +1,12 @@
 /*------------------------------------*\
-  $BASE
+  #BASE
 \*------------------------------------*/
 
-@import 'base/general',
-        'base/shared',
-        'base/typography',
-        'base/lists',
-        'base/quotes',
-        'base/rules',
-        'base/images';
+@import "base/general",
+        "base/shared",
+        "base/typography",
+        "base/lists",
+        "base/quotes",
+        "base/figures",
+        "base/rules",
+        "base/images";

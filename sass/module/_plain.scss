@@ -1,17 +1,11 @@
 /*------------------------------------*\
-  $PLAIN ELEMENTS
+  #PLAIN ELEMENTS
 \*------------------------------------*/
 
 /**
- * Remove the default styling from elements with the relevant class attached
+ * Plain lists remove bullets and align flush with content.
  */
 
-
-/**
- * Plain list
- *
- * Remove bullets and align flush with content
- */
 .plain-list,
 %plain-list {
   padding-left: 0;
@@ -20,10 +14,9 @@
 
 
 /**
- * Plain link
- *
- * Override the link styles found in base/_paragraph.scss here
+ * Plain links override the link styles found in base/_typography.scss.
  */
+
 .plain-link,
 %plain-link {
   border-bottom: 0;

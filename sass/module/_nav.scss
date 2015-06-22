@@ -1,5 +1,5 @@
 /*------------------------------------*\
-   $NAVIGATION
+  #NAVIGATION
 \*------------------------------------*/
 
 /**
@@ -7,6 +7,7 @@
  * simple list. Remove the list styles so that we have free reign over the
  * aesthetic.
  */
+
 .nav {
   @extend %plain-list;
 
@@ -17,8 +18,9 @@
 
 
 /**
- * Horizontally align links for a navbar
+ * Horizontally align links for a navbar.
  */
+
 .nav--line {
   > li,
   > li > a {
