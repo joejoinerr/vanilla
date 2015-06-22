@@ -6,6 +6,13 @@ module.exports = function(grunt) {
     // Read packages
     pkg: grunt.file.readJSON("package.json"),
 
+    // Copy Bower components into the project
+    bowercopy: {
+      copy: {
+        files: { "css/normalize.css": "normalize.css:main" }
+      }
+    },
+
     // LibSass preprocessing
     sass: {
       options: {
@@ -89,6 +96,7 @@ module.exports = function(grunt) {
   });
 
   // Load plugins
+  grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks("grunt-sass");
   grunt.loadNpmTasks("grunt-contrib-csslint");
   grunt.loadNpmTasks("grunt-contrib-uglify");
@@ -97,6 +105,7 @@ module.exports = function(grunt) {
 
   // Run tasks
   grunt.registerTask("default", ["sass:dev", "connect", "watch"]);
+  grunt.registerTask("copy", ["bowercopy"])
   grunt.registerTask("build", ["sass:dev", "uglify"]);
   grunt.registerTask("lint", ["sass:dev", "csslint"]);
   grunt.registerTask("dist", ["sass:dist", "uglify"]);
