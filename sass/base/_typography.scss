@@ -90,6 +90,22 @@ li {
 
 
 /**
+ * Horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+
+
+
+
+/**
  * Links
  * NOTE: Override these styles with `.plain-link` in module/_plain.scss.
  */
