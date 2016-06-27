@@ -23,6 +23,30 @@ $selection-color: #b3d4fc;
 
 
 /**
+ * Consistent spacing for vertical rhythm.
+ */
+
+p,
+ul,
+ol,
+dl,
+blockquote,
+table,
+fieldset,
+figure,
+pre,
+hr,
+.spaced-block,
+%spaced-block {
+  margin-top: 0;
+  margin-bottom: $space;
+}
+
+
+
+
+
+/**
  * Headings
  *
  * Heading definitions also include a class name to apply heading styles to
@@ -113,7 +137,6 @@ hr {
 
 /**
  * Links
- * NOTE: Override these styles with `.plain-link` in module/_plain.scss.
  */
 
 @mixin link-underline {
@@ -135,4 +158,10 @@ a {
   // &:focus {
 
   // }
+}
+
+.plain-link,
+%plain-link {
+  border-bottom: 0;
+  color: inherit;
 }
