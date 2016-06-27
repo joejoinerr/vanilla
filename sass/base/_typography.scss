@@ -27,7 +27,8 @@ $selection-color: #b3d4fc;
  *
  * Heading definitions also include a class name to apply heading styles to
  * other elements, or even other headings.
- * NOTE: Use `text-rendering` with caution - http://goo.gl/hNVLXT
+ *
+ * 1. Use `text-rendering` with caution - http://goo.gl/hNVLXT
  */
 
 h1,
@@ -40,7 +41,7 @@ h6 {
   margin-bottom: $half-space;
   font-weight: 700;
   line-height: $heading-line-height;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility; /* [1] */
 }
 
 h1, .alpha   { font-size: $h1; }
@@ -83,21 +84,6 @@ li {
     margin-bottom: 0; /* [1] */
   }
 }
-
-
-
-
-
-/**
- * Quotes
- */
-
- blockquote {
-   padding-left: $space;
-   border-left: 3px solid;
-   margin-right: 0;
-   margin-left: 0;
- }
 
 
 
