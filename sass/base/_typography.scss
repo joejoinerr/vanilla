@@ -19,6 +19,9 @@ $selection-color: #b3d4fc;
 }
 
 
+
+
+
 /**
  * Headings
  *
@@ -63,6 +66,41 @@ h6, .zeta    { font-size: $h6; }
 
 small, .milli { font-size: $milli; }
 .micro        { font-size: $micro; }
+
+
+
+
+
+/**
+ * Lists
+ *
+ * 1. Remove vertical spacing from nested lists.
+ */
+
+li {
+  ul,
+  ol {
+    margin-bottom: 0; /* [1] */
+  }
+}
+
+
+
+
+
+/**
+ * Quotes
+ */
+
+ blockquote {
+   padding-left: $space;
+   border-left: 3px solid;
+   margin-right: 0;
+   margin-left: 0;
+ }
+
+
+
 
 
 /**
