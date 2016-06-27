@@ -1,10 +1,9 @@
 /*------------------------------------*\
-  #MODULE
+  #COMPONENTS
 \*------------------------------------*/
 
-@import "module/plain",
-        "module/media",
-        "module/quotes",
-        "module/forms",
-        "module/btn",
-        "module/nav";
+@import "components/media",
+        "components/quotes",
+        "components/forms",
+        "components/btn",
+        "components/nav";
