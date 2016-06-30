@@ -32,6 +32,10 @@ var sassOptions = {
   precision: 5
 };
 
+var scssLintOptions = {
+  config: 'scss-lint.yml',
+}
+
 
 /**
  * Compile sass
@@ -54,9 +58,7 @@ gulp.task('sass', function() {
 gulp.task('lint', function() {
   return gulp.src(paths.sass)
     .pipe(cache('scsslint'))
-    .pipe(scsslint({
-      config: 'scss-lint.yml'
-    }))
+    .pipe(scsslint(scssLintOptions))
 });
 
 
