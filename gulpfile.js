@@ -19,13 +19,13 @@ var gulp = require('gulp'),
 
 // Input paths
 var paths = {
-  src: './src',
-  tmp: './.tmp',
-  dist: './dist',
-  html: '/**/*.html',
-  sass: '/sass/**/*.scss',
-  css: '/css/**/*.css',
-  js: '/js/**/*.js'
+  src: './src/',
+  tmp: './.tmp/',
+  dist: './dist/',
+  html: '**/*.html',
+  sass: 'sass/**/*.scss',
+  css: 'css/**/*.css',
+  js: 'js/**/*.js'
 };
 
 
@@ -44,7 +44,7 @@ gulp.task('sass', function() {
     precision: 5
   };
 
-  return gulp.src(paths.sass)
+  return gulp.src(paths.src + paths.sass)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer())
@@ -56,7 +56,7 @@ gulp.task('sass', function() {
 
 // Lint Sass
 gulp.task('lint', function() {
-  return gulp.src(paths.sass)
+  return gulp.src(paths.src + paths.sass)
     .pipe(cache('scsslint'))
     .pipe(scsslint(scssLintOptions))
 });
