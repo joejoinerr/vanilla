@@ -1,0 +1,15 @@
+linters:
+  BemDepth:
+    enabled: true
+
+  ColorVariable:
+    enabled: false
+
+  Comment:
+    enabled: false
+
+  PropertySortOrder:
+    order: recess
+
+  SelectorFormat:
+    convention: hyphenated_BEM
