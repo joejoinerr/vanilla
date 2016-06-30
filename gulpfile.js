@@ -13,13 +13,19 @@ var gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
 
 
 // Input paths
 var paths = {
-  sass: './sass/**/*.scss',
-  html: './**/*.html'
+  src: './src',
+  tmp: './.tmp',
+  dist: './dist',
+  html: '/**/*.html',
+  sass: '/sass/**/*.scss',
+  css: '/css/**/*.css',
+  js: '/js/**/*.js'
 };
 
 
@@ -42,8 +48,9 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(autoprefixer())
-    .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('./css'))
+    .pipe(sourcemaps.write('./maps', { cwd: paths.tmp }))
+    .pipe(gulp.dest('./css', { cwd: paths.tmp }))
+    .pipe(reload({ stream: true }))
 });
 
 
@@ -55,22 +62,13 @@ gulp.task('lint', function() {
 });
 
 
-// Reload HTML
-gulp.task('html', function() {
-  gulp.src(paths.html)
-    .pipe(browserSync.reload({ stream: true }))
+// Create server
+gulp.task('serve', ['sass'], function() {
+  browserSync({
+    server: {
+      baseDir: paths.tmp
+    }
+  });
+
+  gulp.watch([paths.html, paths.css, paths.js], { cwd: paths.tmp }, reload)
 });
-
-
-// Master watch
-gulp.task('watch', function() {
-  return gulp
-    .watch(paths.sass, ['sass'])
-      .on('change', function(event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-      })
-});
-
-
-// Register default tasks
-gulp.task('default', ['sass', 'watch']);
