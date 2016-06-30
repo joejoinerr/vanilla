@@ -25,12 +25,7 @@ var paths = {
  * Options vars
  */
 
-var sassOptions = {
-  errLogToConsole: true,
-  includePaths: ['./bower_components'],
-  outputStyle: 'compressed',
-  precision: 5
-};
+
 
 var scssLintOptions = {
   config: 'scss-lint.yml',
@@ -42,6 +37,13 @@ var scssLintOptions = {
  */
 
 gulp.task('sass', function() {
+  var sassOptions = {
+    errLogToConsole: true,
+    includePaths: ['./bower_components'],
+    outputStyle: 'compressed',
+    precision: 5
+  };
+
   return gulp.src(paths.sass)
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
