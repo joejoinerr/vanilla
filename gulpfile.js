@@ -1,7 +1,12 @@
 /**
- * Import task runners
+ *
+ * Vanilla Boilerplate
+ * Copyright 2016 Joe Joiner.
+ *
  */
 
+
+// Import task runners
 var gulp = require('gulp'),
     cache = require('gulp-cached'),
     sass = require('gulp-sass'),
@@ -11,31 +16,20 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create();
 
 
-/**
- * Input paths
- */
-
+// Input paths
 var paths = {
   sass: './sass/**/*.scss',
   html: './**/*.html'
 };
 
 
-/**
- * Options vars
- */
-
-
-
+// Options vars
 var scssLintOptions = {
   config: 'scss-lint.yml',
 }
 
 
-/**
- * Compile sass
- */
-
+// Compile sass
 gulp.task('sass', function() {
   var sassOptions = {
     errLogToConsole: true,
@@ -53,10 +47,7 @@ gulp.task('sass', function() {
 });
 
 
-/**
- * Lint Sass
- */
-
+// Lint Sass
 gulp.task('lint', function() {
   return gulp.src(paths.sass)
     .pipe(cache('scsslint'))
@@ -64,20 +55,14 @@ gulp.task('lint', function() {
 });
 
 
-/**
- * Reload HTML
- */
-
+// Reload HTML
 gulp.task('html', function() {
   gulp.src(paths.html)
     .pipe(browserSync.reload({ stream: true }))
 });
 
 
-/**
- * Master watch
- */
-
+// Master watch
 gulp.task('watch', function() {
   return gulp
     .watch(paths.sass, ['sass'])
@@ -87,8 +72,5 @@ gulp.task('watch', function() {
 });
 
 
-/**
- * Register default tasks
- */
-
+// Register default tasks
 gulp.task('default', ['sass', 'watch']);
