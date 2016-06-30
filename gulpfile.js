@@ -55,8 +55,7 @@ gulp.task('lint', function() {
   return gulp.src(paths.sass)
     .pipe(cache('scsslint'))
     .pipe(scsslint({
-      config: 'scss-lint.yml',
-      endless: true
+      config: 'scss-lint.yml'
     }))
 });
 
