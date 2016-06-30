@@ -19,6 +19,6 @@ $palettes: (
 
 // Palette function to create the palette() syntax from the above map.
 
-@function palette($palette, $tone: "base") {
+@function palette($palette, $tone: 'base') {
   @return map-get(map-get($palettes, $palette), $tone);
 }
