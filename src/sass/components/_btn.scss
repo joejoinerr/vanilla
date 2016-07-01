@@ -4,32 +4,31 @@
 
 /**
  *  1. Reset link styles to make way for button styles.
- *  2. Reset `<button>` element defaults.
- *  3. Better box model than `inline`.
- *  4. Line buttons up better together and with other elements.
- *  5. Give the text some space.
- *  6. Inherit font from the container.
- *  7. Format the button's text to simplify padding.
- *  8. More than one button next to each other should be spaced apart.
+ *  2. Better box model than `inline`.
+ *  4. Format the button's text to simplify padding.
+ *  5. Line buttons up better together and with other elements.
+ *  6. Reset `<button>` element defaults.
+ *  7. More than one button next to each other should be spaced apart.
  */
 
 .btn {
   @extend %plain-link;         /* [1] */
-  appearance: none;            /* [2] */
 
-  display: inline-block;       /* [3] */
-  vertical-align: middle;      /* [4] */
-  padding: $half-space $space; /* [5] */
-  // border: 0;                   /* [2] */
-  margin: 0;                   /* [2] */
-  cursor: pointer;             /* [2] */
+  display: inline-block;       /* [2] */
+  padding: $half-space $space;
+  margin: 0;
 
-  font-family: inherit;        /* [6] */
-  line-height: 1;              /* [7] */
-  text-align: center;          /* [7] */
-  white-space: nowrap;         /* [7] */
+  font-family: inherit;
+  line-height: 1;              /* [4] */
+  text-align: center;          /* [4] */
+  white-space: nowrap;         /* [4] */
+  vertical-align: middle;      /* [5] */
+
+  // border: 0;                   /* [6] */
+  cursor: pointer;             /* [6] */
+  appearance: none;            /* [6] */
 
   & + & {
-    margin-left: $half-space;  /* [8] */
+    margin-left: $half-space;  /* [7] */
   }
 }

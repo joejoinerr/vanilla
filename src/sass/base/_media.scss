@@ -29,7 +29,9 @@ img {
  * Don't flow image dimensions if you specify a height or width in the HTML.
  */
 
+// scss-lint:disable QualifyingElement
 img[width],
 img[height] {
   max-width: none;
 }
+// scss-lint:enable QualifyingElement

@@ -6,8 +6,6 @@
  * Media Object:
  * The media object is a common layout in modern design: an image or other
  * media alongside a body of text.
- *
- * 1. Ensure the wrapper and body text contain the elements within.
  */
 
 .media {
@@ -20,9 +18,13 @@
   margin-right: $half-space;
 }
 
+/**
+ * 1. Ensure the wrapper and body text contain the elements within.
+ */
+
 .media__body {
-  overflow: hidden; /* [1] */
   display: block;
+  overflow: hidden; /* [1] */
 
   &,
   > :last-child {

@@ -7,9 +7,9 @@
  * Supports IE8 and above
  */
 
-.clearfix:after,
-%clearfix:after {
-  content: '';
+.clearfix::after,
+%clearfix::after {
   display: table;
   clear: both;
+  content: '';
 }

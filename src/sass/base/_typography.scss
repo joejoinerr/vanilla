@@ -8,14 +8,16 @@
 
 $selection-color: #b3d4fc;
 
+// scss-lint:disable VendorPrefix
 ::-moz-selection {
-  background: $selection-color;
   text-shadow: none;
+  background: $selection-color;
+// scss-lint:enable VendorPrefix
 }
 
 ::selection {
-  background: $selection-color;
   text-shadow: none;
+  background: $selection-color;
 }
 
 
@@ -68,12 +70,14 @@ h6 {
   text-rendering: optimizeLegibility; /* [1] */
 }
 
+// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
 h1, .alpha   { font-size: $h1; }
 h2, .beta    { font-size: $h2; }
 h3, .gamma   { font-size: $h3; }
 h4, .delta   { font-size: $h4; }
 h5, .epsilon { font-size: $h5; }
 h6, .zeta    { font-size: $h6; }
+// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
 /**
@@ -89,8 +93,10 @@ h6, .zeta    { font-size: $h6; }
  * Smallprint and other tiny type.
  */
 
+// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
 small, .milli { font-size: $milli; }
 .micro        { font-size: $micro; }
+// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
 
@@ -140,10 +146,10 @@ hr {
  */
 
 @mixin link-underline {
-  @if $link-underline == "border" {
-    border-bottom: 1px solid;
+  @if $link-underline == 'border' {
     text-decoration: none;
-  } @else if $link-underline == "underline" {
+    border-bottom: 1px solid;
+  } @else if $link-underline == 'underline' {
     text-decoration: underline;
   } @else {
     text-decoration: none;
@@ -162,6 +168,6 @@ a {
 
 .plain-link,
 %plain-link {
-  border-bottom: 0;
   color: inherit;
+  border-bottom: 0;
 }
