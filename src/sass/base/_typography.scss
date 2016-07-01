@@ -140,10 +140,10 @@ hr {
  */
 
 @mixin link-underline {
-  @if $link-underline == "border" {
+  @if $link-underline == 'border' {
     border-bottom: 1px solid;
     text-decoration: none;
-  } @else if $link-underline == "underline" {
+  } @else if $link-underline == 'underline' {
     text-decoration: underline;
   } @else {
     text-decoration: none;

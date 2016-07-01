@@ -17,9 +17,9 @@ html {
 }
 
 *,
-*:before,
-*:after {
-    box-sizing: inherit; /* [1] */
+*::before,
+*::after {
+  box-sizing: inherit; /* [1] */
 }
 
 body {
