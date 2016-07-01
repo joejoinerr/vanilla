@@ -8,9 +8,11 @@
 
 $selection-color: #b3d4fc;
 
+// scss-lint:disable VendorPrefix
 ::-moz-selection {
   background: $selection-color;
   text-shadow: none;
+// scss-lint:enable VendorPrefix
 }
 
 ::selection {
@@ -68,12 +70,14 @@ h6 {
   text-rendering: optimizeLegibility; /* [1] */
 }
 
+// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
 h1, .alpha   { font-size: $h1; }
 h2, .beta    { font-size: $h2; }
 h3, .gamma   { font-size: $h3; }
 h4, .delta   { font-size: $h4; }
 h5, .epsilon { font-size: $h5; }
 h6, .zeta    { font-size: $h6; }
+// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
 /**
@@ -89,8 +93,10 @@ h6, .zeta    { font-size: $h6; }
  * Smallprint and other tiny type.
  */
 
+// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
 small, .milli { font-size: $milli; }
 .micro        { font-size: $micro; }
+// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
 
