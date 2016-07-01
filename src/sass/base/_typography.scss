@@ -10,14 +10,14 @@ $selection-color: #b3d4fc;
 
 // scss-lint:disable VendorPrefix
 ::-moz-selection {
-  background: $selection-color;
   text-shadow: none;
+  background: $selection-color;
 // scss-lint:enable VendorPrefix
 }
 
 ::selection {
-  background: $selection-color;
   text-shadow: none;
+  background: $selection-color;
 }
 
 
@@ -147,8 +147,8 @@ hr {
 
 @mixin link-underline {
   @if $link-underline == 'border' {
-    border-bottom: 1px solid;
     text-decoration: none;
+    border-bottom: 1px solid;
   } @else if $link-underline == 'underline' {
     text-decoration: underline;
   } @else {
@@ -168,6 +168,6 @@ a {
 
 .plain-link,
 %plain-link {
-  border-bottom: 0;
   color: inherit;
+  border-bottom: 0;
 }
