@@ -2,19 +2,25 @@
 // #SETTINGS
 // -----------------------------------*/
 
+//
 // External settings imports
+//
+
 @import 'settings.color';
 
 
+//
 // Base typography configuration
 //
 // 1. A setting of 100% for the body font size will create a 16px default.
+//
 
 $base-font-size: 100%; // [1]
 $base-line-height: 1.5;
 $base-font-family: sans-serif;
 
 
+//
 // Font sizes are set using the Modular Scale Sass plugin for improved
 // typography. Typographic scale can be calculated using:
 // http://modularscale.com/
@@ -23,11 +29,13 @@ $base-font-family: sans-serif;
 // 2. Ratio for the multiples on the typographic scale. A list of ratio
 //    variables can be found here:
 //    https://github.com/modularscale/modular-scale#ratios
+//
 
 $ms-base: 1em; // [1]
 $ms-ratio: $augmented-fourth; // [2]
 
 
+//
 // Font sizes
 // 1. Extra large text classes
 // 2. Heading font sizes
@@ -35,6 +43,7 @@ $ms-ratio: $augmented-fourth; // [2]
 // 4. Default line height for headings
 // 5. Use these variables in base/_typography.scss to override the default
 //    heading line-height
+//
 
 $giga:   ms(7);                        // [1]
 $mega:   ms(6);                        // [1]
@@ -60,26 +69,28 @@ $h5-line-height: $heading-line-height; // [5]
 $h6-line-height: $heading-line-height; // [5]
 
 
+//
 // Styling for links
 //
-// 1. Possible options are `underline` (default), `border`, or `none`
 
 $link-color: hsl(240, 100%, 50%);
-$link-underline: underline; // [1]
-$link-hover-underline: none;
 
 
+//
 // Vertical rhythm units
+//
 
 $space: $base-line-height * 1rem;
 $half-space: $space / 2;
 $em-space: $base-line-height * 1em;
 
 
+//
 // Layout is achieved using the Susy grid system. The options are available at:
 // http://susy.readthedocs.org/en/latest/settings/
 //
 // 1. Breakpoints for mobile-first design
+//
 
 $susy: (
   global-box-sizing: border-box,
@@ -89,4 +100,4 @@ $susy: (
 );
 
 $break-mid:   32em; // [1]
-$break-large: 46em; // [1]
+$break-wide: 46em; // [1]
