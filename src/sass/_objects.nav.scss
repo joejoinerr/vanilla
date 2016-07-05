@@ -8,20 +8,9 @@
  * aesthetic.
  */
 
-.nav {
+.o-nav {
   @extend %plain-list;
 
-  a {
-    @extend %plain-link;
-  }
-}
-
-
-/**
- * Horizontally align links for a navbar.
- */
-
-.nav--line {
   > li,
   > li > a {
     display: inline-block;
