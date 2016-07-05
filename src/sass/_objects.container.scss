@@ -2,7 +2,7 @@
   #CONTAINER
 \*------------------------------------*/
 
-.container {
+.o-container {
   @include container;
   padding-right: $space;
   padding-left: $space;
