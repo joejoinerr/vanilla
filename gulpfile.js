@@ -44,7 +44,7 @@ gulp.task('sass', function() {
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('./maps', { cwd: paths.tmp }))
     .pipe(gulp.dest('./css', { cwd: paths.tmp }))
-    .pipe(reload({ stream: true }))
+    .pipe(browserSync.stream())
 });
 
 
@@ -60,13 +60,22 @@ gulp.task('lint', function() {
 });
 
 
+// Copy HTML
+gulp.task('html', function() {
+  return gulp.src(paths.src + paths.html)
+    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+});
+
+
 // Create server
-gulp.task('serve', ['sass'], function() {
-  browserSync({
+gulp.task('serve', ['sass', 'html'], function() {
+  browserSync.init({
     server: {
       baseDir: paths.tmp
     }
   });
 
-  gulp.watch([paths.html, paths.css, paths.js], { cwd: paths.tmp }, reload)
+  gulp.watch(paths.sass, { cwd: paths.src }, ['sass']);
+  gulp.watch(paths.html, { cwd: paths.src }, ['html']);
+  gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
