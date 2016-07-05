@@ -7,9 +7,24 @@
  * Supports IE8 and above
  */
 
-.clearfix::after,
-%clearfix::after {
+.u-clearfix::after {
   display: table;
   clear: both;
   content: '';
+}
+
+
+
+
+
+/**
+ * Floats
+ */
+
+.u-float-left {
+  float: left !important;
+}
+
+.u-float-right {
+  float: right !important;
 }
