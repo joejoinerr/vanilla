@@ -29,12 +29,6 @@ var paths = {
 };
 
 
-// Options vars
-var scssLintOptions = {
-  config: 'scss-lint.yml',
-}
-
-
 // Compile sass
 gulp.task('sass', function() {
   var sassOptions = {
@@ -56,6 +50,10 @@ gulp.task('sass', function() {
 
 // Lint Sass
 gulp.task('lint', function() {
+  var scssLintOptions = {
+    config: 'scss-lint.yml',
+  }
+
   return gulp.src(paths.src + paths.sass)
     .pipe(cache('scsslint'))
     .pipe(scsslint(scssLintOptions))
