@@ -12,7 +12,7 @@
  */
 
 .c-btn {
-  @extend %plain-link;         /* [1] */
+  @extend %o-plain-link;         /* [1] */
 
   display: inline-block;       /* [2] */
   padding: $half-space $space;

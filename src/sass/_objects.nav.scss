@@ -8,7 +8,7 @@
  */
 
 .o-nav {
-  @extend %plain-list;
+  @extend %o-plain-list;
 
   > li,
   > li > a {

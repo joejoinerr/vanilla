@@ -140,8 +140,8 @@ hr {
  */
 
 a {
-  text-decoration: underline;
   color: $link-color;
+  text-decoration: underline;
 
   &:hover,
   &:focus {

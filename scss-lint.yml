@@ -8,6 +8,9 @@ linters:
   Comment:
     enabled: false
 
+  ImportantRule:
+    enabled: false
+
   PropertySortOrder:
     order:
       - position
