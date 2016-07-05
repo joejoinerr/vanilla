@@ -8,23 +8,17 @@
  * media alongside a body of text.
  */
 
-.media {
-  @extend %spaced-block;
-  @extend %clearfix; /* [1] */
+.o-media {
+  display: flex;
+  align-items: flex-start;
 }
 
-.media__visual {
-  float: left;
+.o-media__figure {
   margin-right: $half-space;
 }
 
-/**
- * 1. Ensure the wrapper and body text contain the elements within.
- */
-
-.media__body {
-  display: block;
-  overflow: hidden; /* [1] */
+.o-media__body {
+  flex: 1;
 
   &,
   > :last-child {
@@ -34,10 +28,21 @@
 
 
 /**
- * Reversed media has the visual on the right instead of the left.
+ * Media with vertical centering
  */
 
-.media--rev .media__visual {
-  float: right;
-  margin-left: $half-space;
+.o-media--center {
+  align-items: center;
+}
+
+
+/**
+ * Reversed media has `.o-media__figure` on the right instead of the left.
+ */
+
+.o-media--reverse {
+  > .o-media__figure {
+    order: 1;
+    margin-left: $half-space;
+  }
 }
