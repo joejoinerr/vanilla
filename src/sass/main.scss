@@ -1,14 +1,48 @@
 /*! Base Project by Joe Joiner ~ http://joejoiner.me */
 
-// Dependency imports
+//
+// Dependencies
+//
+
 @import 'susy/sass/susy';
 @import 'breakpoint-sass/stylesheets/breakpoint';
 @import 'modular-scale/stylesheets/modular-scale';
 
 
-// Project partials
+//
+// Settings
+//
+
 @import 'settings';
-@import 'base';
+
+
+//
+// Base
+//
+
+@import 'base.page';
+@import 'base.typography';
+@import 'base.media';
+
+
+//
+// Objects
+//
+
+@import 'objects.container';
+@import 'objects.media';
+@import 'objects.nav';
+
+
+//
+// Components
+//
+
 @import 'components';
-@import 'layout';
-@import 'helper';
+
+
+//
+// Utilities
+//
+
+@import 'utility';
