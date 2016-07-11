@@ -6,7 +6,10 @@
  */
 
 
+//
 // Import task runners
+//
+
 var gulp = require('gulp'),
     cache = require('gulp-cached'),
     sass = require('gulp-sass'),
@@ -19,7 +22,10 @@ var gulp = require('gulp'),
     reload = browserSync.reload;
 
 
+//
 // Input paths
+//
+
 var paths = {
   src: './src/',
   tmp: './.tmp/',
@@ -32,14 +38,23 @@ var paths = {
 };
 
 
+
+
+
+//
 // Copy HTML
+//
+
 gulp.task('html', function() {
   return gulp.src(paths.src + paths.html)
     .pipe(gulp.dest('./', { cwd: paths.tmp }))
 });
 
 
+//
 // Minify HTML
+//
+
 gulp.task('htmlmin', ['html'], function() {
   var htmlMinOptions = {
     collapseBooleanAttributes: true,
@@ -58,7 +73,13 @@ gulp.task('htmlmin', ['html'], function() {
 });
 
 
+
+
+
+//
 // Compile sass
+//
+
 gulp.task('sass', function() {
   var sassOptions = {
     errLogToConsole: true,
@@ -77,7 +98,10 @@ gulp.task('sass', function() {
 });
 
 
+//
 // Lint Sass
+//
+
 gulp.task('lint', function() {
   // Options vars
   var scssLintOptions = {
@@ -90,7 +114,10 @@ gulp.task('lint', function() {
 });
 
 
+//
 // Minify CSS
+//
+
 gulp.task('cssmin', ['sass'], function() {
   var cleanCSSOptions = {
     debug: true,
@@ -103,7 +130,13 @@ gulp.task('cssmin', ['sass'], function() {
 });
 
 
+
+
+
+//
 // Copy images
+//
+
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
     .pipe(gulp.dest('./img', { cwd: paths.tmp }))
@@ -111,7 +144,13 @@ gulp.task('img', function() {
 });
 
 
+
+
+
+//
 // Create server
+//
+
 gulp.task('serve', ['sass', 'html'], function() {
   browserSync.init({
     server: {
@@ -125,5 +164,8 @@ gulp.task('serve', ['sass', 'html'], function() {
 });
 
 
+//
 // Compile for production
+//
+
 gulp.task('dist', ['cssmin', 'htmlmin', 'img']);
