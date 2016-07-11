@@ -15,7 +15,7 @@
   @extend %o-plain-link;         /* [1] */
 
   display: inline-block;       /* [2] */
-  padding: $half-space $space;
+  padding: ($space / 2) $space;
   margin: 0;
 
   font-family: inherit;
@@ -29,6 +29,6 @@
   appearance: none;            /* [6] */
 
   & + & {
-    margin-left: $half-space;  /* [7] */
+    margin-left: ($space / 2);  /* [7] */
   }
 }

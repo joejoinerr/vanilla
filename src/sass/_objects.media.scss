@@ -14,7 +14,7 @@
 }
 
 .o-media__figure {
-  margin-right: $half-space;
+  margin-right: ($space / 2);
 }
 
 .o-media__body {
@@ -43,6 +43,7 @@
 .o-media--reverse {
   > .o-media__figure {
     order: 1;
-    margin-left: $half-space;
+    margin-right: 0;
+    margin-left: ($space / 2);
   }
 }
