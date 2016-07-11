@@ -13,6 +13,8 @@ var gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
+    htmlmin = require('gulp-htmlmin'),
+    cleancss = require('gulp-cleancss'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload;
 
@@ -25,8 +27,35 @@ var paths = {
   html: '**/*.html',
   sass: 'sass/**/*.scss',
   css: 'css/**/*.css',
-  js: 'js/**/*.js'
+  js: 'js/**/*.js',
+  img: 'img/**/*.{png,jpg,svg,gif}'
 };
+
+
+// Copy HTML
+gulp.task('html', function() {
+  return gulp.src(paths.src + paths.html)
+    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+});
+
+
+// Minify HTML
+gulp.task('htmlmin', ['html'], function() {
+  var htmlMinOptions = {
+    collapseBooleanAttributes: true,
+    collapseWhitespace: true,
+    removeComments: true,
+    removeEmptyAttributes: true,
+    removeEmptyElements: true,
+    removeRedundantAttributes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true
+  }
+
+  return gulp.src(paths.tmp + paths.html)
+    .pipe(htmlmin(htmlMinOptions))
+    .pipe(gulp.dest('./', { cwd: paths.dist }))
+});
 
 
 // Compile sass
@@ -34,8 +63,8 @@ gulp.task('sass', function() {
   var sassOptions = {
     errLogToConsole: true,
     includePaths: ['./bower_components'],
-    outputStyle: 'compressed',
-    precision: 5
+    outputStyle: 'expanded',
+    precision: 2
   };
 
   return gulp.src(paths.src + paths.sass)
@@ -50,6 +79,7 @@ gulp.task('sass', function() {
 
 // Lint Sass
 gulp.task('lint', function() {
+  // Options vars
   var scssLintOptions = {
     config: 'scss-lint.yml',
   }
@@ -60,10 +90,24 @@ gulp.task('lint', function() {
 });
 
 
-// Copy HTML
-gulp.task('html', function() {
-  return gulp.src(paths.src + paths.html)
-    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+// Minify CSS
+gulp.task('cssmin', ['sass'], function() {
+  var cleanCSSOptions = {
+    debug: true,
+    rebase: false
+  }
+
+  return gulp.src(paths.tmp + paths.css)
+    .pipe(cleancss(cleanCSSOptions))
+    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+});
+
+
+// Copy images
+gulp.task('img', function() {
+  return gulp.src(paths.src + paths.img)
+    .pipe(gulp.dest('./img', { cwd: paths.tmp }))
+    .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 
 
@@ -79,3 +123,7 @@ gulp.task('serve', ['sass', 'html'], function() {
   gulp.watch(paths.html, { cwd: paths.src }, ['html']);
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
+
+
+// Compile for production
+gulp.task('dist', ['cssmin', 'htmlmin', 'img']);
