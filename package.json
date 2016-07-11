@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "author": "Joe Joiner",
   "private": true,
-  "main": "index.html",
+  "main": "src/index.html",
   "devDependencies": {
     "browser-sync": "^2.13.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cached": "^1.1.0",
+    "gulp-cleancss": "^0.2.2",
+    "gulp-htmlmin": "^2.0.0",
     "gulp-sass": "^2.3.2",
     "gulp-scss-lint": "^0.4.0",
     "gulp-sourcemaps": "^1.6.0"
