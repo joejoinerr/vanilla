@@ -70,13 +70,6 @@ $h6-line-height: $heading-line-height; // [5]
 
 
 //
-// Styling for links
-//
-
-$link-color: hsl(240, 100%, 50%);
-
-
-//
 // Vertical rhythm units
 //
 
@@ -85,18 +78,8 @@ $em-space: $base-line-height * 1em;
 
 
 //
-// Layout is achieved using the Susy grid system. The options are available at:
-// http://susy.readthedocs.org/en/latest/settings/
+// Breakpoints for mobile-first design
 //
-// 1. Breakpoints for mobile-first design
-//
-
-$susy: (
-  global-box-sizing: border-box,
-  columns: 12,
-  column-width: 4em,
-  gutters: .25
-);
 
 $break-mid:   32em; // [1]
 $break-wide: 46em; // [1]
