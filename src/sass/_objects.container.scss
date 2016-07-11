@@ -3,7 +3,11 @@
 \*------------------------------------*/
 
 .o-container {
-  @include container;
+  @extend %u-clearfix;
+  max-width: 46rem;
   padding-right: $space;
   padding-left: $space;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: visible;
 }
