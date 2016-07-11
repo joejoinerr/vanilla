@@ -71,12 +71,12 @@ h6 {
 }
 
 // scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
-h1, .alpha   { font-size: $h1; }
-h2, .beta    { font-size: $h2; }
-h3, .gamma   { font-size: $h3; }
-h4, .delta   { font-size: $h4; }
-h5, .epsilon { font-size: $h5; }
-h6, .zeta    { font-size: $h6; }
+h1, .u-alpha   { font-size: $h1; }
+h2, .u-beta    { font-size: $h2; }
+h3, .u-gamma   { font-size: $h3; }
+h4, .u-delta   { font-size: $h4; }
+h5, .u-epsilon { font-size: $h5; }
+h6, .u-zeta    { font-size: $h6; }
 // scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
@@ -84,9 +84,9 @@ h6, .zeta    { font-size: $h6; }
  * Extra-huge text.
  */
 
-.giga { font-size: $giga; }
-.mega { font-size: $mega; }
-.kilo { font-size: $kilo; }
+.u-giga { font-size: $giga; }
+.u-mega { font-size: $mega; }
+.u-kilo { font-size: $kilo; }
 
 
 /**
@@ -94,8 +94,8 @@ h6, .zeta    { font-size: $h6; }
  */
 
 // scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
-small, .milli { font-size: $milli; }
-.micro        { font-size: $micro; }
+small, .u-milli { font-size: $milli; }
+.u-micro        { font-size: $micro; }
 // scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
 
 
@@ -140,7 +140,7 @@ hr {
  */
 
 a {
-  color: $link-color;
+  color: inherit;
   text-decoration: underline;
 
   &:hover,
