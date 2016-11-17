@@ -42,29 +42,10 @@ var paths = {
 
 gulp.task('html', function() {
   return gulp.src(paths.src + paths.html)
+    .pipe(plugins.nunjucksRender({
+      path: ['src']
+    }))
     .pipe(gulp.dest('./', { cwd: paths.tmp }))
-});
-
-
-/**
- * Minify HTML
- */
-
-gulp.task('html:dist', ['html'], function() {
-  var htmlMinOptions = {
-    collapseBooleanAttributes: true,
-    collapseWhitespace: true,
-    removeComments: true,
-    removeEmptyAttributes: true,
-    removeEmptyElements: true,
-    removeRedundantAttributes: true,
-    removeScriptTypeAttributes: true,
-    removeStyleLinkTypeAttributes: true
-  }
-
-  return gulp.src(paths.tmp + paths.html)
-    .pipe(plugins.htmlmin(htmlMinOptions))
-    .pipe(gulp.dest('./', { cwd: paths.dist }))
 });
 
 
@@ -135,6 +116,16 @@ gulp.task('cssmin', ['sass'], function() {
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
     .pipe(gulp.dest('./img', { cwd: paths.tmp }))
+});
+
+
+/**
+ * Minify images
+ */
+
+gulp.task('img:dist', ['img'], function() {
+  return gulp.src(paths.tmp + paths.img)
+    .pipe(imagemin())
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 

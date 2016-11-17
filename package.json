@@ -10,8 +10,9 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cached": "^1.1.0",
     "gulp-cleancss": "^0.2.2",
-    "gulp-htmlmin": "^2.0.0",
+    "gulp-imagemin": "^3.1.1",
     "gulp-load-plugins": "^1.4.0",
+    "gulp-nunjucks-render": "^2.0.0",
     "gulp-sass": "^2.3.2",
     "gulp-scss-lint": "^0.4.0",
     "gulp-sourcemaps": "^1.6.0"
