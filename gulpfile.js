@@ -37,7 +37,7 @@ var paths = {
 
 
 /**
- * Copy HTML
+ * Render HTML
  */
 
 gulp.task('html', function() {
@@ -46,6 +46,16 @@ gulp.task('html', function() {
       path: ['src']
     }))
     .pipe(gulp.dest('./', { cwd: paths.tmp }))
+});
+
+
+/**
+ * Copy HTML
+ */
+
+gulp.task('html:dist', ['html'], function() {
+  return gulp.src(paths.tmp + paths.html)
+    .pipe(gulp.dest('./', { cwd: paths.dist }))
 });
 
 
@@ -154,4 +164,4 @@ gulp.task('serve', ['sass', 'html'], function() {
  * Compile for production
  */
 
-gulp.task('dist', ['cssmin', 'html:dist', 'img']);
+gulp.task('dist', ['cssmin', 'html:dist', 'img:dist']);
