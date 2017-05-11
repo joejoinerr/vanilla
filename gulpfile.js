@@ -6,6 +6,10 @@
  */
 
 
+/*------------------------------------*\
+  #INITIAL CONFIG
+\*------------------------------------*/
+
 /**
  * Import task runners
  */
@@ -23,7 +27,7 @@ var reload = browserSync.reload;
 
 var paths = {
   src: './src/',
-  tmp: './.tmp/',
+  tmp: './tmp/',
   dist: './dist/',
   html: '**/*.html',
   sass: 'sass/**/*.scss',
@@ -35,6 +39,10 @@ var paths = {
 
 
 
+
+/*------------------------------------*\
+  #HTML
+\*------------------------------------*/
 
 /**
  * Render HTML
@@ -61,6 +69,10 @@ gulp.task('html:dist', ['html'], function() {
 
 
 
+
+/*------------------------------------*\
+  #CSS
+\*------------------------------------*/
 
 /**
  * Compile sass
@@ -119,6 +131,10 @@ gulp.task('cssmin', ['sass'], function() {
 
 
 
+/*------------------------------------*\
+  #IMAGES
+\*------------------------------------*/
+
 /**
  * Copy images
  */
@@ -143,6 +159,10 @@ gulp.task('img:dist', ['img'], function() {
 
 
 
+/*------------------------------------*\
+  #SERVER
+\*------------------------------------*/
+
 /**
  * Create server
  */
@@ -159,6 +179,13 @@ gulp.task('serve', ['sass', 'html'], function() {
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
 
+
+
+
+
+/*------------------------------------*\
+  #SCRIPT GROUPS
+\*------------------------------------*/
 
 /**
  * Compile for production
