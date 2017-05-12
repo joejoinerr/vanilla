@@ -33,7 +33,7 @@ var paths = {
   sass: 'sass/**/*.scss',
   css: 'css/**/*.css',
   js: 'js/**/*.js',
-  img: 'img/**/*.{png,jpg,svg,gif}'
+  img: 'img/**/*.+(png|jpg|svg|gif)'
 };
 
 
@@ -49,7 +49,7 @@ var paths = {
  */
 
 gulp.task('html', function() {
-  return gulp.src(paths.src + paths.html)
+  return gulp.src(paths.src + '**/*.njk')
     .pipe(plugins.nunjucksRender({
       path: ['src']
     }))
