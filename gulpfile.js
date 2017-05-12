@@ -151,13 +151,13 @@ gulp.task('img', function() {
 
 gulp.task('img:dist', ['img'], function() {
   var imageminPluginOptions = [
-    plugin.imagemin.jpegtran({ progressive: true }),
-    plugin.imagemin.gifsicle({ interlaced: true }),
-    plugin.imagemin.optipng({ optimizationLevel: 5 }),
+    plugins.imagemin.jpegtran({ progressive: true }),
+    plugins.imagemin.gifsicle({ interlaced: true }),
+    plugins.imagemin.optipng({ optimizationLevel: 5 }),
   ]
 
   return gulp.src(paths.tmp + paths.img)
-    .pipe(plugin.imagemin(imageminPluginOptions, { verbose: true }))
+    .pipe(plugins.imagemin(imageminPluginOptions, { verbose: true }))
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 
