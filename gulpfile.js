@@ -164,7 +164,7 @@ gulp.task('img:dist', ['img'], function() {
 \*------------------------------------*/
 
 /**
- * Create server
+ * Create servera and watch files
  */
 
 gulp.task('serve', ['sass', 'html'], function() {
