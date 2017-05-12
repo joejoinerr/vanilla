@@ -151,7 +151,7 @@ gulp.task('img', function() {
 
 gulp.task('img:dist', ['img'], function() {
   return gulp.src(paths.tmp + paths.img)
-    .pipe(imagemin())
+    .pipe(plugins.imagemin())
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 
