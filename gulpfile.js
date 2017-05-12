@@ -1,7 +1,7 @@
 /**
  *
  * Vanilla Boilerplate
- * Copyright 2016 Joe Joiner.
+ * by Joe Joiner
  *
  */
 
