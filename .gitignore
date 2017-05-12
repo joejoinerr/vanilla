@@ -26,6 +26,10 @@ bower_components
 .bower-tmp
 
 
+# macOS files
+.DS_Store
+
+
 # Build folders
 tmp
 dist
