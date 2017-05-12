@@ -150,8 +150,13 @@ gulp.task('img', function() {
  */
 
 gulp.task('img:dist', ['img'], function() {
+  var imageminOptions = {
+    imagemin.jpegtran({ progressive: true })
+    imagemin.gifsicle({ interlaced: true })
+  }
+
   return gulp.src(paths.tmp + paths.img)
-    .pipe(plugins.imagemin())
+    .pipe(plugin.imagemin())
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 
