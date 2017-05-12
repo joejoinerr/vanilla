@@ -151,8 +151,9 @@ gulp.task('img', function() {
 
 gulp.task('img:dist', ['img'], function() {
   var imageminOptions = {
-    imagemin.jpegtran({ progressive: true })
-    imagemin.gifsicle({ interlaced: true })
+    imagemin.jpegtran({ progressive: true }),
+    imagemin.gifsicle({ interlaced: true }),
+    imagemin.optipng({ optimizationLevel: 5 }),
   }
 
   return gulp.src(paths.tmp + paths.img)
