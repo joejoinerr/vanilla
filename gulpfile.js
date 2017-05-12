@@ -27,7 +27,7 @@ var reload = browserSync.reload;
 
 var paths = {
   src: './src/',
-  tmp: './tmp/',
+  tmp: './.tmp/',
   dist: './dist/',
   html: '**/*.html',
   sass: 'sass/**/*.scss',
