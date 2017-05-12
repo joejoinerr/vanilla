@@ -31,5 +31,5 @@ bower_components
 
 
 # Build folders
-tmp
+.tmp
 dist
