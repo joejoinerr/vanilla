@@ -17,6 +17,7 @@
 var gulp = require('gulp');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var plugins = gulpLoadPlugins();
+var pngquant = require('imagemin-pngquant');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 
@@ -150,14 +151,14 @@ gulp.task('img', function() {
  */
 
 gulp.task('img:dist', ['img'], function() {
-  var imageminPluginOptions = [
+  var imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
-    plugins.imagemin.optipng({ optimizationLevel: 5 }),
+    pngquant()
   ]
 
   return gulp.src(paths.tmp + paths.img)
-    .pipe(plugins.imagemin(imageminPluginOptions, { verbose: true }))
+    .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
 
