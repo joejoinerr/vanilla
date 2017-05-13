@@ -49,7 +49,7 @@ var paths = {
  * Render HTML
  */
 
-gulp.task('html', function() {
+gulp.task('njk', function() {
   return gulp.src(paths.src + '**/*.njk')
     .pipe(plugins.nunjucksRender({
       path: ['src']
@@ -57,12 +57,21 @@ gulp.task('html', function() {
     .pipe(gulp.dest('./', { cwd: paths.tmp }))
 });
 
-
 /**
- * Copy HTML
+ * Copy HTML to tmp folder
  */
 
-gulp.task('html:dist', ['html'], function() {
+gulp.task('html', function() {
+  return gulp.src(paths.src + paths.html)
+    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+});
+
+
+/**
+ * Copy HTML to build folder
+ */
+
+gulp.task('html:dist', ['njk', 'html'], function() {
   return gulp.src(paths.tmp + paths.html)
     .pipe(gulp.dest('./', { cwd: paths.dist }))
 });
@@ -125,6 +134,12 @@ gulp.task('cssmin', ['sass'], function() {
 
   return gulp.src(paths.tmp + paths.css)
     .pipe(plugins.cleancss(cleanCSSOptions))
+    .pipe(plugins.rev())
+    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+    .pipe(plugins.rev.manifest({
+      base: paths.dist,
+      merge: true
+    }))
     .pipe(gulp.dest('./css', { cwd: paths.dist }))
 });
 
@@ -195,7 +210,16 @@ gulp.task('serve', ['sass', 'html'], function() {
 \*------------------------------------*/
 
 /**
- * Compile for production
+ * Compile for production and version files
  */
 
-gulp.task('dist', ['cssmin', 'html:dist', 'img:dist']);
+gulp.task('dist', ['cssmin', 'html:dist', 'img:dist'], function() {
+  var manifest = gulp.src(paths.dist + 'rev-manifest.json')
+
+  return gulp.src(paths.tmp + paths.html)
+    .pipe(plugins.revReplace({
+      manifest: manifest,
+      replaceInExtensions: ['.html']
+    }))
+    .pipe(gulp.dest(paths.dist))
+});
