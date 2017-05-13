@@ -14,7 +14,7 @@
 }
 
 .o-media__figure {
-  margin-right: ($space / 2);
+  margin-right: 1rem;
 }
 
 .o-media__body {
@@ -44,6 +44,6 @@
   > .o-media__figure {
     order: 1;
     margin-right: 0;
-    margin-left: ($space / 2);
+    margin-left: 1rem;
   }
 }
