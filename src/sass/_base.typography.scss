@@ -49,60 +49,6 @@ hr,
 
 
 /**
- * Headings
- *
- * Heading definitions also include a class name to apply heading styles to
- * other elements, or even other headings.
- *
- * 1. Use `text-rendering` with caution - http://goo.gl/hNVLXT
- */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
-  margin-bottom: ($space / 2);
-  font-weight: 700;
-  line-height: $heading-line-height;
-  text-rendering: optimizeLegibility; /* [1] */
-}
-
-// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
-h1, .u-alpha   { font-size: $h1; }
-h2, .u-beta    { font-size: $h2; }
-h3, .u-gamma   { font-size: $h3; }
-h4, .u-delta   { font-size: $h4; }
-h5, .u-epsilon { font-size: $h5; }
-h6, .u-zeta    { font-size: $h6; }
-// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
-
-
-/**
- * Extra-huge text.
- */
-
-.u-giga { font-size: $giga; }
-.u-mega { font-size: $mega; }
-.u-kilo { font-size: $kilo; }
-
-
-/**
- * Smallprint and other tiny type.
- */
-
-// scss-lint:disable SingleLinePerSelector, SpaceBeforeBrace
-small, .u-milli { font-size: $milli; }
-.u-micro        { font-size: $micro; }
-// scss-lint:enable SingleLinePerSelector, SpaceBeforeBrace
-
-
-
-
-
-/**
  * Lists
  *
  * 1. Remove vertical spacing from nested lists.
