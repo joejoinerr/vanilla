@@ -8,7 +8,6 @@
  *  4. Format the button's text to simplify padding.
  *  5. Line buttons up better together and with other elements.
  *  6. Reset `<button>` element defaults.
- *  7. More than one button next to each other should be spaced apart.
  */
 
 .c-btn {
@@ -27,8 +26,4 @@
   // border: 0;                   /* [6] */
   cursor: pointer;             /* [6] */
   appearance: none;            /* [6] */
-
-  & + & {
-    margin-left: ($space / 2);  /* [7] */
-  }
 }
