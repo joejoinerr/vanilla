@@ -66,22 +66,6 @@ li {
 
 
 /**
- * Horizontal rule
- */
-
-hr {
-  display: block;
-  height: 1px;
-  padding: 0;
-  border: 0;
-  border-top: 1px solid #ccc;
-}
-
-
-
-
-
-/**
  * Links
  */
 
@@ -93,4 +77,20 @@ a {
   &:focus {
     text-decoration: none;
   }
+}
+
+
+
+
+
+/**
+ * Horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
 }
