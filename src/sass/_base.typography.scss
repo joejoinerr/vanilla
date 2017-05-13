@@ -94,3 +94,18 @@ hr {
   border: 0;
   border-top: 1px solid #ccc;
 }
+
+
+
+
+
+/**
+ * Better default blockquote
+ */
+
+blockquote {
+  padding-left: 1rem;
+  margin-right: 0;
+  margin-left: 0;
+  border-left: 3px solid;
+}
