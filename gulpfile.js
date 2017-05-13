@@ -126,7 +126,7 @@ gulp.task('lint', function() {
  * Minify CSS
  */
 
-gulp.task('cssmin', ['sass'], function() {
+gulp.task('css:dist', ['sass'], function() {
   var cleanCSSOptions = {
     debug: true,
     rebase: false
@@ -213,7 +213,7 @@ gulp.task('serve', ['sass', 'html'], function() {
  * Compile for production and version files
  */
 
-gulp.task('dist', ['cssmin', 'html:dist', 'img:dist'], function() {
+gulp.task('dist', ['css:dist', 'html:dist', 'img:dist'], function() {
   var manifest = gulp.src(paths.dist + 'rev-manifest.json')
 
   return gulp.src(paths.tmp + paths.html)
