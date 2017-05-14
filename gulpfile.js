@@ -210,6 +210,13 @@ gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
 \*------------------------------------*/
 
 /**
+ * Temporary compile
+ */
+
+gulp.task('compile', ['sass', 'html', 'njk', 'img'])
+
+
+/**
  * Compile for production and version files
  */
 
