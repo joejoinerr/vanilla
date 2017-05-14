@@ -93,19 +93,10 @@ blockquote {
 
 
 /**
- * Define custom text-selection colors and remove shadows.
+ * Define custom text-selection color and remove shadows.
  */
-
-$selection-color: #b3d4fc;
-
-// scss-lint:disable VendorPrefix
-::-moz-selection {
-  text-shadow: none;
-  background: $selection-color;
-// scss-lint:enable VendorPrefix
-}
 
 ::selection {
   text-shadow: none;
-  background: $selection-color;
+  background: #b3d4fc;
 }
