@@ -189,7 +189,7 @@ gulp.task('img:dist', ['img'], function() {
  * Create servera and watch files
  */
 
-gulp.task('serve', ['sass', 'html'], function() {
+gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
   browserSync.init({
     server: {
       baseDir: paths.tmp
