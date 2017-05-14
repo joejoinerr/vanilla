@@ -3,28 +3,6 @@
 \*------------------------------------*/
 
 /**
- * Define custom text-selection colors and remove shadows.
- */
-
-$selection-color: #b3d4fc;
-
-// scss-lint:disable VendorPrefix
-::-moz-selection {
-  text-shadow: none;
-  background: $selection-color;
-// scss-lint:enable VendorPrefix
-}
-
-::selection {
-  text-shadow: none;
-  background: $selection-color;
-}
-
-
-
-
-
-/**
  * Consistent spacing for vertical rhythm.
  */
 
@@ -108,4 +86,26 @@ blockquote {
   margin-right: 0;
   margin-left: 0;
   border-left: 3px solid;
+}
+
+
+
+
+
+/**
+ * Define custom text-selection colors and remove shadows.
+ */
+
+$selection-color: #b3d4fc;
+
+// scss-lint:disable VendorPrefix
+::-moz-selection {
+  text-shadow: none;
+  background: $selection-color;
+// scss-lint:enable VendorPrefix
+}
+
+::selection {
+  text-shadow: none;
+  background: $selection-color;
 }
