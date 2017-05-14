@@ -3,27 +3,24 @@
 \*------------------------------------*/
 
 /**
- *  1. Reset link styles to make way for button styles.
- *  2. Better box model than `inline`.
- *  4. Format the button's text to simplify padding.
- *  5. Line buttons up better together and with other elements.
- *  6. Reset `<button>` element defaults.
+ *  1. Better box model than `inline`.
+ *  2. Format the button's text to simplify padding.
+ *  3. Line buttons up better together and with other elements.
+ *  4. Reset `<button>` element defaults.
  */
 
 .c-btn {
-  @extend %o-plain-link;         /* [1] */
-
-  display: inline-block;       /* [2] */
+  display: inline-block;       /* [1] */
   padding: .5rem 1rem;
   margin: 0;
 
   font-family: inherit;
-  line-height: 1;              /* [4] */
-  text-align: center;          /* [4] */
-  white-space: nowrap;         /* [4] */
-  vertical-align: middle;      /* [5] */
+  line-height: 1;              /* [2] */
+  text-align: center;          /* [2] */
+  white-space: nowrap;         /* [2] */
+  vertical-align: middle;      /* [3] */
 
-  // border: 0;                   /* [6] */
-  cursor: pointer;             /* [6] */
-  appearance: none;            /* [6] */
+  // border: 0;                   /* [4] */
+  cursor: pointer;             /* [4] */
+  appearance: none;            /* [4] */
 }
