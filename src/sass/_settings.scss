@@ -34,8 +34,10 @@ $base-font-family: sans-serif;
 //    https://github.com/modularscale/modular-scale#ratios
 //
 
-$ms-base: 1em; // [1]
-$ms-ratio: $augmented-fourth; // [2]
+$modularscale: (
+  base: 1em, // [1]
+  ratio: $fifth // [2]
+)
 
 
 //
