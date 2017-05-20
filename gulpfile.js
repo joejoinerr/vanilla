@@ -91,7 +91,7 @@ gulp.task('html:dist', ['njk', 'html'], function() {
 gulp.task('sass', function() {
   var sassOptions = {
     errLogToConsole: true,
-    includePaths: ['./bower_components'],
+    includePaths: ['./node_modules'],
     outputStyle: 'expanded',
     precision: 2
   };
