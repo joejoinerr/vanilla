@@ -20,6 +20,7 @@ var plugins = gulpLoadPlugins();
 var pngquant = require('imagemin-pngquant');
 var browserSync = require('browser-sync').create();
 var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 var reload = browserSync.reload;
 
 
@@ -98,7 +99,8 @@ gulp.task('sass', function() {
   };
 
   var postcssPlugins = [
-    autoprefixer()
+    autoprefixer(),
+    cssnano()
   ]
 
   return gulp.src(paths.src + paths.sass)
