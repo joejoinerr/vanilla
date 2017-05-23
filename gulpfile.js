@@ -19,6 +19,7 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 var plugins = gulpLoadPlugins();
 var pngquant = require('imagemin-pngquant');
 var browserSync = require('browser-sync').create();
+var autoprefixer = require('autoprefixer');
 var reload = browserSync.reload;
 
 
@@ -96,10 +97,14 @@ gulp.task('sass', function() {
     precision: 2
   };
 
+  var postcssPlugins = [
+    autoprefixer()
+  ]
+
   return gulp.src(paths.src + paths.sass)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
-    .pipe(plugins.autoprefixer())
+    .pipe(plugins.postcss(postcssPlugins))
     .pipe(plugins.sourcemaps.write('./maps', { cwd: paths.tmp }))
     .pipe(gulp.dest('./css', { cwd: paths.tmp }))
     .pipe(browserSync.stream())
