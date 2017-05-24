@@ -362,6 +362,10 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
+brand-colors@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/brand-colors/-/brand-colors-1.2.1.tgz#2301b192790c8dab4fb4a8abe1b205d82e50adfd"
+
 breakpoint-sass@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/breakpoint-sass/-/breakpoint-sass-2.7.1.tgz#8ef6c4744dcc25ba83d969b6c9a17e5daa29980a"
@@ -3383,6 +3387,13 @@ portscanner@2.1.1:
   dependencies:
     async "1.5.2"
     is-number-like "^1.0.3"
+
+postcss-brand-colors@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-brand-colors/-/postcss-brand-colors-1.0.0.tgz#e055cf6ccffd9f185524b41f713d1c74e3ebd991"
+  dependencies:
+    brand-colors "^1.2.1"
+    postcss "^6.0.1"
 
 postcss-calc@^5.2.0:
   version "5.3.1"

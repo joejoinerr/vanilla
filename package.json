@@ -22,6 +22,7 @@
     "gulp-scss-lint": "^0.4.0",
     "gulp-sourcemaps": "^2.6.0",
     "imagemin-pngquant": "^5.0.0",
-    "modularscale-sass": "^3.0.2"
+    "modularscale-sass": "^3.0.2",
+    "postcss-brand-colors": "^1.0.0"
   }
 }
