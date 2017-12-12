@@ -7,12 +7,10 @@
 
 
 /*------------------------------------*\
-  #INITIAL CONFIG
+  #CONFIG
 \*------------------------------------*/
 
-/**
- * Import task runners
- */
+// Import task runners
 
 var gulp = require('gulp');
 var gulpLoadPlugins = require('gulp-load-plugins');
@@ -25,9 +23,7 @@ var brandColors = require('postcss-brand-colors');
 var reload = browserSync.reload;
 
 
-/**
- * Input paths
- */
+// Input paths
 
 var paths = {
   src: './src/',
@@ -48,9 +44,7 @@ var paths = {
   #HTML
 \*------------------------------------*/
 
-/**
- * Render HTML
- */
+// Render HTML
 
 gulp.task('njk', function() {
   return gulp.src(paths.src + '**/*.njk')
@@ -60,9 +54,8 @@ gulp.task('njk', function() {
     .pipe(gulp.dest('./', { cwd: paths.tmp }))
 });
 
-/**
- * Copy HTML to tmp folder
- */
+
+// Copy HTML to tmp folder
 
 gulp.task('html', function() {
   return gulp.src(paths.src + paths.html)
@@ -70,9 +63,7 @@ gulp.task('html', function() {
 });
 
 
-/**
- * Copy HTML to build folder
- */
+// Copy HTML to build folder
 
 gulp.task('html:dist', ['njk', 'html'], function() {
   return gulp.src(paths.tmp + paths.html)
@@ -87,9 +78,7 @@ gulp.task('html:dist', ['njk', 'html'], function() {
   #CSS
 \*------------------------------------*/
 
-/**
- * Compile sass
- */
+// Compile Sass
 
 gulp.task('sass', function() {
   var sassOptions = {
@@ -115,9 +104,7 @@ gulp.task('sass', function() {
 });
 
 
-/**
- * Lint Sass
- */
+// Lint Sass
 
 gulp.task('lint', function() {
   // Options vars
@@ -131,9 +118,7 @@ gulp.task('lint', function() {
 });
 
 
-/**
- * Minify CSS
- */
+// Minify CSS
 
 gulp.task('css:dist', ['sass'], function() {
   var cleanCSSOptions = {
@@ -160,9 +145,7 @@ gulp.task('css:dist', ['sass'], function() {
   #IMAGES
 \*------------------------------------*/
 
-/**
- * Copy images
- */
+// Copy images
 
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
@@ -170,9 +153,7 @@ gulp.task('img', function() {
 });
 
 
-/**
- * Minify images
- */
+// Minify images
 
 gulp.task('img:dist', ['img'], function() {
   var imageminPlugins = [
@@ -194,9 +175,7 @@ gulp.task('img:dist', ['img'], function() {
   #SERVER
 \*------------------------------------*/
 
-/**
- * Create servera and watch files
- */
+// Create servera and watch files
 
 gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
   browserSync.init({
@@ -218,16 +197,12 @@ gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
   #SCRIPT GROUPS
 \*------------------------------------*/
 
-/**
- * Temporary compile
- */
+// Temporary compile
 
 gulp.task('compile', ['sass', 'html', 'njk', 'img'])
 
 
-/**
- * Compile for production and version files
- */
+// Compile for production and version files
 
 gulp.task('dist', ['css:dist', 'html:dist', 'img:dist'], function() {
   var manifest = gulp.src(paths.dist + 'rev-manifest.json')
