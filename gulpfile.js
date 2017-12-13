@@ -80,7 +80,7 @@ gulp.task('html:dist', ['njk', 'html'], function() {
 
 // Compile Sass
 
-gulp.task('sass', function() {
+gulp.task('css', function() {
   var sassOptions = {
     errLogToConsole: true,
     includePaths: ['./node_modules'],
@@ -120,7 +120,7 @@ gulp.task('lint', function() {
 
 // Minify CSS
 
-gulp.task('css:dist', ['sass'], function() {
+gulp.task('css:dist', ['css'], function() {
   var cleanCSSOptions = {
     debug: true,
     rebase: false
@@ -177,14 +177,14 @@ gulp.task('img:dist', ['img'], function() {
 
 // Create servera and watch files
 
-gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
+gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
   browserSync.init({
     server: {
       baseDir: paths.tmp
     }
   });
 
-  gulp.watch(paths.sass, { cwd: paths.src }, ['sass']);
+  gulp.watch(paths.sass, { cwd: paths.src }, ['css']);
   gulp.watch(paths.html, { cwd: paths.src }, ['html']);
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
@@ -199,7 +199,7 @@ gulp.task('serve', ['sass', 'html', 'njk', 'img'], function() {
 
 // Temporary compile
 
-gulp.task('compile', ['sass', 'html', 'njk', 'img'])
+gulp.task('compile', ['css', 'html', 'njk', 'img'])
 
 
 // Compile for production and version files
