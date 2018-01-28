@@ -1,3 +1,4 @@
+'use strict'
 /**
  *
  * Vanilla Boilerplate
@@ -12,20 +13,20 @@
 
 // Import task runners
 
-var gulp = require('gulp');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var plugins = gulpLoadPlugins();
-var pngquant = require('imagemin-pngquant');
-var browserSync = require('browser-sync').create();
-var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
-var brandColors = require('postcss-brand-colors');
-var reload = browserSync.reload;
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const plugins = gulpLoadPlugins();
+const pngquant = require('imagemin-pngquant');
+const browserSync = require('browser-sync').create();
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const brandColors = require('postcss-brand-colors');
+const reload = browserSync.reload;
 
 
 // Input paths
 
-var paths = {
+const paths = {
   src: './src/',
   tmp: './.tmp/',
   dist: './dist/',
@@ -81,14 +82,14 @@ gulp.task('html:dist', ['njk', 'html'], function() {
 // Compile Sass
 
 gulp.task('css', function() {
-  var sassOptions = {
+  const sassOptions = {
     errLogToConsole: true,
     includePaths: ['./node_modules'],
     outputStyle: 'expanded',
     precision: 2
   };
 
-  var postcssPlugins = [
+  const postcssPlugins = [
     brandColors(),
     autoprefixer(),
     cssnano()
@@ -107,8 +108,8 @@ gulp.task('css', function() {
 // Lint Sass
 
 gulp.task('lint', function() {
-  // Options vars
-  var scssLintOptions = {
+  // Options consts
+  const scssLintOptions = {
     config: 'scss-lint.yml',
   }
 
@@ -121,7 +122,7 @@ gulp.task('lint', function() {
 // Minify CSS
 
 gulp.task('css:dist', ['css'], function() {
-  var cleanCSSOptions = {
+  const cleanCSSOptions = {
     debug: true,
     rebase: false
   }
@@ -156,7 +157,7 @@ gulp.task('img', function() {
 // Minify images
 
 gulp.task('img:dist', ['img'], function() {
-  var imageminPlugins = [
+  const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
     pngquant()
@@ -205,7 +206,7 @@ gulp.task('compile', ['css', 'html', 'njk', 'img'])
 // Compile for production and version files
 
 gulp.task('dist', ['css:dist', 'html:dist', 'img:dist'], function() {
-  var manifest = gulp.src(paths.dist + 'rev-manifest.json')
+  const manifest = gulp.src(paths.dist + 'rev-manifest.json')
 
   return gulp.src(paths.tmp + paths.html)
     .pipe(plugins.revReplace({
