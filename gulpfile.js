@@ -107,7 +107,6 @@ gulp.task('css', function() {
 // Lint Sass
 
 gulp.task('lint', function() {
-  // Options consts
   const scssLintOptions = {
     config: 'scss-lint.yml',
   }
@@ -153,6 +152,7 @@ gulp.task('img:dist', ['img'], function() {
   const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
+    plugins.imagemin.svgo(),
     pngquant()
   ]
 
