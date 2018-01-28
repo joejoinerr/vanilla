@@ -173,8 +173,12 @@ gulp.task('img:dist', ['img'], function() {
 
 gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
   browserSync.init({
+    browser: 'google chrome',
     server: {
-      baseDir: paths.tmp
+      baseDir: paths.tmp,
+      routes: {
+        '/vendor': './node_modules'
+      }
     }
   });
 
