@@ -14,8 +14,7 @@
 // Import task runners
 
 const gulp = require('gulp');
-const gulpLoadPlugins = require('gulp-load-plugins');
-const plugins = gulpLoadPlugins();
+const plugins = require('gulp-load-plugins')();
 const pngquant = require('imagemin-pngquant');
 const browserSync = require('browser-sync').create();
 const autoprefixer = require('autoprefixer');
@@ -122,13 +121,7 @@ gulp.task('lint', function() {
 // Minify CSS
 
 gulp.task('css:dist', ['css'], function() {
-  const cleanCSSOptions = {
-    debug: true,
-    rebase: false
-  }
-
   return gulp.src(paths.tmp + paths.css)
-    .pipe(plugins.cleancss(cleanCSSOptions))
     .pipe(plugins.rev())
     .pipe(gulp.dest('./css', { cwd: paths.dist }))
     .pipe(plugins.rev.manifest({
