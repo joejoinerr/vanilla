@@ -11,5 +11,23 @@ linters:
   PropertySortOrder:
     enabled: false
 
+  PropertyUnits:
+    global: [
+      'em',
+      'rem',
+      '%',
+      'px',
+      'vh',
+      'vw',
+      'vmin',
+      'vmax',
+      'ms',
+      's',
+      'dpi'
+    ]
+    properties:
+      line-height: []
+      border: ['px']
+
   SelectorFormat:
     convention: hyphenated_BEM

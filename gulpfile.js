@@ -108,12 +108,13 @@ gulp.task('css', function() {
 
 gulp.task('lint', function() {
   const scssLintOptions = {
-    config: 'scss-lint.yml',
+    config: 'scss-lint.yml'
   }
 
   return gulp.src(paths.src + paths.sass)
     .pipe(plugins.cached('plugins.scssLint'))
     .pipe(plugins.scssLint(scssLintOptions))
+    .pipe(plugins.scssLint.failReporter('E'))
 });
 
 
