@@ -142,6 +142,7 @@ gulp.task('css:dist', ['css'], function() {
 
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
+    .pipe(plugins.newer(paths.tmp + paths.img))
     .pipe(gulp.dest('./img', { cwd: paths.tmp }))
 });
 
@@ -157,6 +158,7 @@ gulp.task('img:dist', ['img'], function() {
   ]
 
   return gulp.src(paths.tmp + paths.img)
+    .pipe(plugins.newer(paths.dist + paths.img))
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
     .pipe(gulp.dest('./img', { cwd: paths.dist }))
 });
