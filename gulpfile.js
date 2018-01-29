@@ -51,7 +51,7 @@ gulp.task('njk', function() {
     .pipe(plugins.nunjucksRender({
       path: ['src']
     }))
-    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+    .pipe(gulp.dest(paths.tmp))
 });
 
 
@@ -59,7 +59,7 @@ gulp.task('njk', function() {
 
 gulp.task('html', function() {
   return gulp.src(paths.src + paths.html)
-    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+    .pipe(gulp.dest(paths.tmp))
 });
 
 
@@ -67,7 +67,7 @@ gulp.task('html', function() {
 
 gulp.task('html:dist', ['njk', 'html'], function() {
   return gulp.src(paths.tmp + paths.html)
-    .pipe(gulp.dest('./', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist))
 });
 
 
@@ -98,8 +98,8 @@ gulp.task('css', function() {
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(postcssPlugins))
-    .pipe(plugins.sourcemaps.write('./maps', { cwd: paths.tmp }))
-    .pipe(gulp.dest('./css', { cwd: paths.tmp }))
+    .pipe(plugins.sourcemaps.write(paths.tmp + 'maps/'))
+    .pipe(gulp.dest(paths.tmp + 'css/'))
     .pipe(browserSync.stream())
 });
 
@@ -127,7 +127,7 @@ gulp.task('css:dist', ['css'], function() {
       base: paths.dist,
       merge: true
     }))
-    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'css/'))
 });
 
 
@@ -143,7 +143,7 @@ gulp.task('css:dist', ['css'], function() {
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
     .pipe(plugins.newer(paths.tmp + paths.img))
-    .pipe(gulp.dest('./img', { cwd: paths.tmp }))
+    .pipe(gulp.dest(paths.tmp + 'img/'))
 });
 
 
@@ -160,7 +160,7 @@ gulp.task('img:dist', ['img'], function() {
   return gulp.src(paths.tmp + paths.img)
     .pipe(plugins.newer(paths.dist + paths.img))
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
-    .pipe(gulp.dest('./img', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'img/'))
 });
 
 
