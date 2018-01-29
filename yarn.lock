@@ -3701,13 +3701,6 @@ portscanner@2.1.1:
     async "1.5.2"
     is-number-like "^1.0.3"
 
-postcss-brand-colors@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-brand-colors/-/postcss-brand-colors-2.0.0.tgz#36bd7568c11baa2165f7a029f6c9fc336e23dd6d"
-  dependencies:
-    brand-colors "^2.0.1"
-    postcss "^6.0.12"
-
 postcss-calc@^5.2.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -3950,7 +3943,7 @@ postcss@^6.0.0:
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^6.0.12, postcss@^6.0.16:
+postcss@^6.0.16:
   version "6.0.16"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.16.tgz#112e2fe2a6d2109be0957687243170ea5589e146"
   dependencies:

@@ -6,6 +6,7 @@
   "main": "src/index.html",
   "devDependencies": {
     "autoprefixer": "^7.2.5",
+    "brand-colors": "^2.0.1",
     "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.23.6",
     "cssnano": "^3.10.0",
@@ -22,7 +23,6 @@
     "gulp-scss-lint": "^0.6.1",
     "gulp-sourcemaps": "^2.6.4",
     "imagemin-pngquant": "^5.0.1",
-    "modularscale-sass": "^3.0.5",
-    "postcss-brand-colors": "^2.0.0"
+    "modularscale-sass": "^3.0.5"
   }
 }

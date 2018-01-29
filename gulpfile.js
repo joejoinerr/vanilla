@@ -19,7 +19,6 @@ const pngquant = require('imagemin-pngquant');
 const browserSync = require('browser-sync').create();
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const brandColors = require('postcss-brand-colors');
 const reload = browserSync.reload;
 
 
@@ -89,7 +88,6 @@ gulp.task('css', function() {
   };
 
   const postcssPlugins = [
-    brandColors(),
     autoprefixer(),
     cssnano()
   ]
