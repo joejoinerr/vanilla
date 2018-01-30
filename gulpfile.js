@@ -120,7 +120,7 @@ gulp.task('css:dist', ['css'], function() {
     .pipe(gulp.dest(paths.dist + 'css/')) // Copy unminified
     .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
-    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'css/'))
     .pipe(plugins.rev.manifest({
       base: paths.dist,
       merge: true
