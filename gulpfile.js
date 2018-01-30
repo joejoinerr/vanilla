@@ -87,16 +87,13 @@ gulp.task('css', function() {
     precision: 2
   };
 
-  const postcssPlugins = [
-    autoprefixer(),
-    cssnano()
-  ]
-
   return gulp.src(paths.src + paths.sass)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
-    .pipe(plugins.postcss(postcssPlugins))
-    .pipe(plugins.sourcemaps.write(paths.tmp + 'maps/'))
+    .pipe(plugins.postcss([
+      autoprefixer()
+    ]))
+    .pipe(plugins.sourcemaps.write('./maps'))
     .pipe(gulp.dest(paths.tmp + 'css/'))
     .pipe(browserSync.stream())
 });
@@ -120,6 +117,8 @@ gulp.task('lint', function() {
 
 gulp.task('css:dist', ['css'], function() {
   return gulp.src(paths.tmp + paths.css)
+    .pipe(gulp.dest(paths.dist + 'css/')) // Copy unminified
+    .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
     .pipe(gulp.dest('./css', { cwd: paths.dist }))
     .pipe(plugins.rev.manifest({
