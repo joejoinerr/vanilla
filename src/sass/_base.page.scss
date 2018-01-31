@@ -10,10 +10,10 @@
 
 html {
   box-sizing: border-box; /* [1] */
+  color: palette(dark);
+  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
   height: 100%; /* [2] */
   overflow-y: scroll; /* [3] */
-  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
-  color: palette(dark);
 }
 
 *,
@@ -23,6 +23,6 @@ html {
 }
 
 body {
-  min-height: 100%; /* [3] */
   background-color: palette(light);
+  min-height: 100%; /* [3] */
 }

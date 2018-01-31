@@ -9,7 +9,7 @@
 
 .u-clearfix::after,
 %u-clearfix::after {
-  display: table;
   clear: both;
   content: '';
+  display: table;
 }

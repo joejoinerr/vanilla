@@ -1,3 +1,4 @@
+'use strict'
 /**
  *
  * Vanilla Boilerplate
@@ -12,20 +13,18 @@
 
 // Import task runners
 
-var gulp = require('gulp');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var plugins = gulpLoadPlugins();
-var pngquant = require('imagemin-pngquant');
-var browserSync = require('browser-sync').create();
-var autoprefixer = require('autoprefixer');
-var cssnano = require('cssnano');
-var brandColors = require('postcss-brand-colors');
-var reload = browserSync.reload;
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins')();
+const pngquant = require('imagemin-pngquant');
+const browserSync = require('browser-sync').create();
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const reload = browserSync.reload;
 
 
 // Input paths
 
-var paths = {
+const paths = {
   src: './src/',
   tmp: './.tmp/',
   dist: './dist/',
@@ -51,7 +50,7 @@ gulp.task('njk', function() {
     .pipe(plugins.nunjucksRender({
       path: ['src']
     }))
-    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+    .pipe(gulp.dest(paths.tmp))
 });
 
 
@@ -59,7 +58,7 @@ gulp.task('njk', function() {
 
 gulp.task('html', function() {
   return gulp.src(paths.src + paths.html)
-    .pipe(gulp.dest('./', { cwd: paths.tmp }))
+    .pipe(gulp.dest(paths.tmp))
 });
 
 
@@ -67,7 +66,7 @@ gulp.task('html', function() {
 
 gulp.task('html:dist', ['njk', 'html'], function() {
   return gulp.src(paths.tmp + paths.html)
-    .pipe(gulp.dest('./', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist))
 });
 
 
@@ -81,25 +80,21 @@ gulp.task('html:dist', ['njk', 'html'], function() {
 // Compile Sass
 
 gulp.task('css', function() {
-  var sassOptions = {
+  const sassOptions = {
     errLogToConsole: true,
     includePaths: ['./node_modules'],
     outputStyle: 'expanded',
     precision: 2
   };
 
-  var postcssPlugins = [
-    brandColors(),
-    autoprefixer(),
-    cssnano()
-  ]
-
   return gulp.src(paths.src + paths.sass)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
-    .pipe(plugins.postcss(postcssPlugins))
-    .pipe(plugins.sourcemaps.write('./maps', { cwd: paths.tmp }))
-    .pipe(gulp.dest('./css', { cwd: paths.tmp }))
+    .pipe(plugins.postcss([
+      autoprefixer()
+    ]))
+    .pipe(plugins.sourcemaps.write('./maps'))
+    .pipe(gulp.dest(paths.tmp + 'css/'))
     .pipe(browserSync.stream())
 });
 
@@ -107,34 +102,30 @@ gulp.task('css', function() {
 // Lint Sass
 
 gulp.task('lint', function() {
-  // Options vars
-  var scssLintOptions = {
-    config: 'scss-lint.yml',
+  const scssLintOptions = {
+    config: 'scss-lint.yml'
   }
 
   return gulp.src(paths.src + paths.sass)
     .pipe(plugins.cached('plugins.scssLint'))
     .pipe(plugins.scssLint(scssLintOptions))
+    .pipe(plugins.scssLint.failReporter('E'))
 });
 
 
 // Minify CSS
 
 gulp.task('css:dist', ['css'], function() {
-  var cleanCSSOptions = {
-    debug: true,
-    rebase: false
-  }
-
   return gulp.src(paths.tmp + paths.css)
-    .pipe(plugins.cleancss(cleanCSSOptions))
+    .pipe(gulp.dest(paths.dist + 'css/')) // Copy unminified
+    .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
-    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'css/'))
     .pipe(plugins.rev.manifest({
       base: paths.dist,
       merge: true
     }))
-    .pipe(gulp.dest('./css', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'css/'))
 });
 
 
@@ -149,22 +140,25 @@ gulp.task('css:dist', ['css'], function() {
 
 gulp.task('img', function() {
   return gulp.src(paths.src + paths.img)
-    .pipe(gulp.dest('./img', { cwd: paths.tmp }))
+    .pipe(plugins.newer(paths.tmp + paths.img))
+    .pipe(gulp.dest(paths.tmp + 'img/'))
 });
 
 
 // Minify images
 
 gulp.task('img:dist', ['img'], function() {
-  var imageminPlugins = [
+  const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
+    plugins.imagemin.svgo(),
     pngquant()
   ]
 
   return gulp.src(paths.tmp + paths.img)
+    .pipe(plugins.newer(paths.dist + paths.img))
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
-    .pipe(gulp.dest('./img', { cwd: paths.dist }))
+    .pipe(gulp.dest(paths.dist + 'img/'))
 });
 
 
@@ -179,8 +173,12 @@ gulp.task('img:dist', ['img'], function() {
 
 gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
   browserSync.init({
+    browser: 'google chrome',
     server: {
-      baseDir: paths.tmp
+      baseDir: paths.tmp,
+      routes: {
+        '/vendor': './node_modules'
+      }
     }
   });
 
@@ -188,6 +186,20 @@ gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
   gulp.watch(paths.html, { cwd: paths.src }, ['html']);
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
+
+
+
+
+
+/*------------------------------------*\
+  #MAINTENANCE
+\*------------------------------------*/
+
+gulp.task('bump', function() {
+  return gulp.src('./package.json')
+    .pipe(plugins.bump({ version: '2.0.0' }))
+    .pipe(gulp.dest('./'))
+})
 
 
 
@@ -205,7 +217,7 @@ gulp.task('compile', ['css', 'html', 'njk', 'img'])
 // Compile for production and version files
 
 gulp.task('dist', ['css:dist', 'html:dist', 'img:dist'], function() {
-  var manifest = gulp.src(paths.dist + 'rev-manifest.json')
+  const manifest = gulp.src(paths.dist + 'rev-manifest.json')
 
   return gulp.src(paths.tmp + paths.html)
     .pipe(plugins.revReplace({
