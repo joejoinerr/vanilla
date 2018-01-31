@@ -192,6 +192,20 @@ gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
 
 
 /*------------------------------------*\
+  #MAINTENANCE
+\*------------------------------------*/
+
+gulp.task('bump', function() {
+  return gulp.src('./package.json')
+    .pipe(plugins.bump({ version: '2.0.0' }))
+    .pipe(gulp.dest('./'))
+})
+
+
+
+
+
+/*------------------------------------*\
   #SCRIPT GROUPS
 \*------------------------------------*/
 

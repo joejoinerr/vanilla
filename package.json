@@ -11,6 +11,7 @@
     "browser-sync": "^2.23.6",
     "cssnano": "^3.10.0",
     "gulp": "^3.9.1",
+    "gulp-bump": "^3.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-imagemin": "^4.1.0",
     "gulp-load-plugins": "^1.5.0",
