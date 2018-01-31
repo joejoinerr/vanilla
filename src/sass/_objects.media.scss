@@ -9,8 +9,8 @@
  */
 
 .o-media {
-  display: flex;
   align-items: flex-start;
+  display: flex;
 }
 
 .o-media__figure {
@@ -42,8 +42,8 @@
 
 .o-media--reverse {
   > .o-media__figure {
-    order: 1;
-    margin-right: 0;
     margin-left: 1rem;
+    margin-right: 0;
+    order: 1;
   }
 }

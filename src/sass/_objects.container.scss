@@ -4,10 +4,10 @@
 
 .o-container {
   @extend %u-clearfix;
-  max-width: 52rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin-right: auto;
   margin-left: auto;
+  margin-right: auto;
+  max-width: 52rem;
   overflow: visible;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
