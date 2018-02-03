@@ -29,6 +29,7 @@ const paths = {
   tmp: './.tmp/',
   dist: './dist/',
   html: '**/*.html',
+  twig: '**/*.html.twig',
   sass: 'sass/**/*.scss',
   css: 'css/**/*.css',
   js: 'js/**/*.js',
@@ -45,11 +46,9 @@ const paths = {
 
 // Render HTML
 
-gulp.task('njk', function() {
-  return gulp.src(paths.src + '**/*.njk')
-    .pipe(plugins.nunjucksRender({
-      path: ['src']
-    }))
+gulp.task('twig', function() {
+  return gulp.src(paths.src + paths.twig)
+    .pipe(plugins.twig({ errorLogToConsole: true }))
     .pipe(gulp.dest(paths.tmp))
 });
 
@@ -64,7 +63,7 @@ gulp.task('html', function() {
 
 // Copy HTML to build folder
 
-gulp.task('html:dist', ['njk', 'html'], function() {
+gulp.task('html:dist', ['twig', 'html'], function() {
   return gulp.src(paths.tmp + paths.html)
     .pipe(gulp.dest(paths.dist))
 });
@@ -171,7 +170,7 @@ gulp.task('img:dist', ['img'], function() {
 
 // Create servera and watch files
 
-gulp.task('serve', ['css', 'html', 'njk', 'img'], function() {
+gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
   browserSync.init({
     browser: 'google chrome',
     server: {
@@ -211,7 +210,7 @@ gulp.task('bump', function() {
 
 // Temporary compile
 
-gulp.task('compile', ['css', 'html', 'njk', 'img'])
+gulp.task('compile', ['css', 'html', 'twig', 'img'])
 
 
 // Compile for production and version files
