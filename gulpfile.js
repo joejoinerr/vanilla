@@ -196,7 +196,7 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
 
 gulp.task('bump', function() {
   return gulp.src('./package.json')
-    .pipe(plugins.bump({ version: '2.0.0' }))
+    .pipe(plugins.bump({ version: '2.1.0' }))
     .pipe(gulp.dest('./'))
 })
 
