@@ -183,6 +183,7 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
 
   gulp.watch(paths.sass, { cwd: paths.src }, ['css']);
   gulp.watch(paths.html, { cwd: paths.src }, ['html']);
+  gulp.watch(paths.twig, { cwd: paths.src }, ['twig']);
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
 
