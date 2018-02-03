@@ -183,6 +183,7 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
 
   gulp.watch(paths.sass, { cwd: paths.src }, ['css']);
   gulp.watch(paths.html, { cwd: paths.src }, ['html']);
+  gulp.watch(paths.twig, { cwd: paths.src }, ['twig']);
   gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
 });
 
@@ -196,7 +197,7 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
 
 gulp.task('bump', function() {
   return gulp.src('./package.json')
-    .pipe(plugins.bump({ version: '2.0.0' }))
+    .pipe(plugins.bump({ version: '2.1.0' }))
     .pipe(gulp.dest('./'))
 })
 
