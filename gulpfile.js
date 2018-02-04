@@ -48,7 +48,10 @@ const paths = {
 
 gulp.task('twig', function() {
   return gulp.src(paths.src + paths.twig)
-    .pipe(plugins.twig({ errorLogToConsole: true }))
+    .pipe(plugins.twig({
+      errorLogToConsole: true,
+      extname: false
+    }))
     .pipe(gulp.dest(paths.tmp))
 });
 
@@ -197,7 +200,7 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
 
 gulp.task('bump', function() {
   return gulp.src('./package.json')
-    .pipe(plugins.bump({ version: '2.1.0' }))
+    .pipe(plugins.bump({ version: '2.1.1' }))
     .pipe(gulp.dest('./'))
 })
 
