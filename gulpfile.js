@@ -48,7 +48,10 @@ const paths = {
 
 gulp.task('twig', function() {
   return gulp.src(paths.src + paths.twig)
-    .pipe(plugins.twig({ errorLogToConsole: true }))
+    .pipe(plugins.twig({
+      errorLogToConsole: true,
+      extname: false
+    }))
     .pipe(gulp.dest(paths.tmp))
 });
 
