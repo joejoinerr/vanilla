@@ -220,7 +220,7 @@ export const serve = series(parallel(css, html, twig, img, font), function serve
 
 export const bump = () => {
   return src('./package.json')
-    .pipe(plugins.bump({ version: '2.1.1' }))
+    .pipe(plugins.bump({ version: '3.0.0' }))
     .pipe(dest('./'))
 };
 
