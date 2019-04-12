@@ -13,13 +13,15 @@
 
 // Import task runners
 
-const gulp = require('gulp');
-const plugins = require('gulp-load-plugins')();
-const pngquant = require('imagemin-pngquant');
-const browserSync = require('browser-sync').create();
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const reload = browserSync.reload;
+import { src, dest, series, parallel, watch } from 'gulp';
+import gulpLoadPlugins from 'gulp-load-plugins';
+const plugins = gulpLoadPlugins();
+import pngquant from 'imagemin-pngquant';
+import browserSync from 'browser-sync';
+const bs = browserSync.create();
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import tailwindcss from 'tailwindcss';
 
 
 // Input paths
@@ -33,7 +35,8 @@ const paths = {
   sass: 'sass/**/*.scss',
   css: 'css/**/*.css',
   js: 'js/**/*.js',
-  img: 'img/**/*.+(png|jpg|svg|gif)'
+  img: 'img/**/*.+(png|jpg|svg|gif)',
+  font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
 };
 
 
@@ -44,32 +47,24 @@ const paths = {
   #HTML
 \*------------------------------------*/
 
-// Render HTML
+// Render Twig templates
 
-gulp.task('twig', function() {
-  return gulp.src(paths.src + paths.twig)
+function twig() {
+  return src(paths.src + paths.twig)
     .pipe(plugins.twig({
       errorLogToConsole: true,
       extname: false
     }))
-    .pipe(gulp.dest(paths.tmp))
-});
+    .pipe(dest(paths.dist))
+};
 
 
-// Copy HTML to tmp folder
+// Copy HTML
 
-gulp.task('html', function() {
-  return gulp.src(paths.src + paths.html)
-    .pipe(gulp.dest(paths.tmp))
-});
-
-
-// Copy HTML to build folder
-
-gulp.task('html:dist', ['twig', 'html'], function() {
-  return gulp.src(paths.tmp + paths.html)
-    .pipe(gulp.dest(paths.dist))
-});
+function html() {
+  return src([paths.src + paths.html, paths.src + "*.*"])
+    .pipe(dest(paths.dist))
+};
 
 
 
@@ -81,7 +76,7 @@ gulp.task('html:dist', ['twig', 'html'], function() {
 
 // Compile Sass
 
-gulp.task('css', function() {
+function css() {
   const sassOptions = {
     errLogToConsole: true,
     includePaths: ['./node_modules'],
@@ -89,45 +84,56 @@ gulp.task('css', function() {
     precision: 2
   };
 
-  return gulp.src(paths.src + paths.sass)
+  return src(paths.src + paths.sass)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
     .pipe(plugins.postcss([
+      tailwindcss('./tailwind.js'),
       autoprefixer()
     ]))
     .pipe(plugins.sourcemaps.write('./maps'))
-    .pipe(gulp.dest(paths.tmp + 'css/'))
+    .pipe(dest(paths.dist + 'css/'))
     .pipe(browserSync.stream())
-});
+};
 
 
 // Lint Sass
 
-gulp.task('lint', function() {
+function lint() {
   const scssLintOptions = {
     config: 'scss-lint.yml'
   }
 
-  return gulp.src(paths.src + paths.sass)
+  return src(paths.src + paths.sass)
     .pipe(plugins.cached('plugins.scssLint'))
     .pipe(plugins.scssLint(scssLintOptions))
     .pipe(plugins.scssLint.failReporter('E'))
-});
+};
 
 
 // Minify CSS
 
-gulp.task('css:dist', ['css'], function() {
-  return gulp.src(paths.tmp + paths.css)
-    .pipe(gulp.dest(paths.dist + 'css/')) // Copy unminified
+const cssdist = series(css, function cssdist() {
+  return src(paths.dist + paths.css)
+    .pipe(plugins.purgecss({
+      content: ['dist/**/*.html'],
+      extractors: [{
+        extractor: class {
+          static extract(content) {
+            return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
+          }
+        },
+        extensions: ['html']
+      }]
+    }))
     .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
-    .pipe(gulp.dest(paths.dist + 'css/'))
+    .pipe(dest(paths.dist + 'css/'))
     .pipe(plugins.rev.manifest({
       base: paths.dist,
       merge: true
     }))
-    .pipe(gulp.dest(paths.dist + 'css/'))
+    .pipe(dest(paths.dist + 'css/'))
 });
 
 
@@ -140,16 +146,16 @@ gulp.task('css:dist', ['css'], function() {
 
 // Copy images
 
-gulp.task('img', function() {
-  return gulp.src(paths.src + paths.img)
-    .pipe(plugins.newer(paths.tmp + paths.img))
-    .pipe(gulp.dest(paths.tmp + 'img/'))
-});
+function img() {
+  return src(paths.src + paths.img)
+    .pipe(plugins.newer(paths.dist + paths.img))
+    .pipe(dest(paths.dist + 'img/'))
+};
 
 
 // Minify images
 
-gulp.task('img:dist', ['img'], function() {
+const imgdist = series(img, function imgdist() {
   const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
@@ -157,11 +163,25 @@ gulp.task('img:dist', ['img'], function() {
     pngquant()
   ]
 
-  return gulp.src(paths.tmp + paths.img)
+  return src(paths.dist + paths.img)
     .pipe(plugins.newer(paths.dist + paths.img))
+    // .pipe(plugins.webp())
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
-    .pipe(gulp.dest(paths.dist + 'img/'))
+    .pipe(dest(paths.dist + 'img/'))
 });
+
+
+
+
+
+/*------------------------------------*\
+  #FONTS
+\*------------------------------------*/
+
+function font() {
+  return src(paths.src + paths.font)
+    .pipe(dest(paths.dist + 'font/'))
+};
 
 
 
@@ -173,21 +193,21 @@ gulp.task('img:dist', ['img'], function() {
 
 // Create servera and watch files
 
-gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
-  browserSync.init({
-    browser: 'google chrome',
+export const serve = series(parallel(css, html, twig, img, font), function serve() {
+  bs.init({
+    browser: 'opera',
     server: {
-      baseDir: paths.tmp,
+      baseDir: paths.dist,
       routes: {
         '/vendor': './node_modules'
       }
     }
   });
 
-  gulp.watch(paths.sass, { cwd: paths.src }, ['css']);
-  gulp.watch(paths.html, { cwd: paths.src }, ['html']);
-  gulp.watch(paths.twig, { cwd: paths.src }, ['twig']);
-  gulp.watch(paths.html, { cwd: paths.tmp }).on('change', reload);
+  watch(paths.src + paths.sass, css);
+  watch(paths.src + paths.html, html);
+  watch(paths.src + paths.twig, twig);
+  watch(paths.dist + paths.html).on('change', bs.reload);
 });
 
 
@@ -198,11 +218,11 @@ gulp.task('serve', ['css', 'html', 'twig', 'img'], function() {
   #MAINTENANCE
 \*------------------------------------*/
 
-gulp.task('bump', function() {
-  return gulp.src('./package.json')
+export const bump = () => {
+  return src('./package.json')
     .pipe(plugins.bump({ version: '2.1.1' }))
-    .pipe(gulp.dest('./'))
-})
+    .pipe(dest('./'))
+};
 
 
 
@@ -214,18 +234,18 @@ gulp.task('bump', function() {
 
 // Temporary compile
 
-gulp.task('compile', ['css', 'html', 'twig', 'img'])
+export const compile = parallel(css, html, twig, img, font)
 
 
 // Compile for production and version files
 
-gulp.task('dist', ['css:dist', 'html:dist', 'img:dist'], function() {
-  const manifest = gulp.src(paths.dist + 'rev-manifest.json')
+export const dist = series(parallel(cssdist, html, imgdist, font), function dist() {
+  const manifest = src(paths.dist + 'rev-manifest.json')
 
-  return gulp.src(paths.tmp + paths.html)
+  return src(paths.dist + paths.html)
     .pipe(plugins.revReplace({
       manifest: manifest,
       replaceInExtensions: ['.html']
     }))
-    .pipe(gulp.dest(paths.dist))
+    .pipe(dest(paths.dist))
 });
