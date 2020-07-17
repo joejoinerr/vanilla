@@ -81,7 +81,7 @@ function css() {
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.postcss([
       atImport(),
-      tailwindcss('./tailwind.js'),
+      tailwindcss(),
       autoprefixer()
     ]))
     .pipe(plugins.sourcemaps.write('./maps'))
