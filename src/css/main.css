@@ -1,23 +1,23 @@
 /*! Vanilla Boilerplate by Joe Joiner */
 
-//
-// Base
-//
+/**
+ * Base
+ */
 
 @import 'tailwindcss/base';
-@import 'base.page';
+@import '_base.page';
 
 
-//
-// Components
-//
+/**
+ * Components
+ */
 
 @import 'tailwindcss/components';
-@import 'components.btn';
+@import '_components.btn';
 
 
-//
-// Utilities
-//
+/**
+ * Utilities
+ */
 
 @import 'tailwindcss/utilities';

@@ -22,6 +22,7 @@ const bs = browserSync.create();
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import tailwindcss from 'tailwindcss';
+import atImport from 'postcss-import';
 
 
 // Input paths
@@ -32,8 +33,7 @@ const paths = {
   dist: './dist/',
   html: '**/*.html',
   twig: '**/*.html.twig',
-  sass: 'sass/**/*.scss',
-  css: 'css/**/*.css',
+  css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
   img: 'img/**/*.+(png|jpg|svg|gif)',
   font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
@@ -74,40 +74,19 @@ function html() {
   #CSS
 \*------------------------------------*/
 
-// Compile Sass
+// Compile CSS
 
 function css() {
-  const sassOptions = {
-    errLogToConsole: true,
-    includePaths: ['./node_modules'],
-    outputStyle: 'expanded',
-    precision: 2
-  };
-
-  return src(paths.src + paths.sass)
+  return src(paths.src + paths.css)
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
     .pipe(plugins.postcss([
-      tailwindcss('./tailwind.js'),
+      atImport(),
+      tailwindcss(),
       autoprefixer()
     ]))
     .pipe(plugins.sourcemaps.write('./maps'))
     .pipe(dest(paths.dist + 'css/'))
     .pipe(browserSync.stream())
-};
-
-
-// Lint Sass
-
-function lint() {
-  const scssLintOptions = {
-    config: 'scss-lint.yml'
-  }
-
-  return src(paths.src + paths.sass)
-    .pipe(plugins.cached('plugins.scssLint'))
-    .pipe(plugins.scssLint(scssLintOptions))
-    .pipe(plugins.scssLint.failReporter('E'))
 };
 
 
@@ -204,7 +183,7 @@ export const serve = series(parallel(css, html, twig, img, font), function serve
     }
   });
 
-  watch(paths.src + paths.sass, css);
+  watch(paths.src + paths.css, css);
   watch(paths.src + paths.html, html);
   watch(paths.src + paths.twig, twig);
   watch(paths.dist + paths.html).on('change', bs.reload);
