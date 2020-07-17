@@ -4,7 +4,7 @@
 // Base
 //
 
-@tailwind base;
+@import 'tailwindcss/base';
 @import 'base.page';
 
 
@@ -12,7 +12,7 @@
 // Components
 //
 
-@tailwind components;
+@import 'tailwindcss/components';
 @import 'components.btn';
 
 
@@ -20,4 +20,4 @@
 // Utilities
 //
 
-@tailwind utilities;
+@import 'tailwindcss/utilities';
