@@ -33,7 +33,7 @@ const paths = {
   dist: './dist/',
   html: '**/*.html',
   twig: '**/*.html.twig',
-  css: 'css/**/*.css',
+  css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
   img: 'img/**/*.+(png|jpg|svg|gif)',
   font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
