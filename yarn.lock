@@ -1485,11 +1485,6 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-breakpoint-sass@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/breakpoint-sass/-/breakpoint-sass-2.7.1.tgz#8ef6c4744dcc25ba83d969b6c9a17e5daa29980a"
-  integrity sha1-jvbEdE3MJbqD2Wm2yaF+XaopmAo=
-
 browser-sync-client@^2.26.10:
   version "2.26.10"
   resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.26.10.tgz#ca9309ba19f9695e7945b95062da8a7ef3156711"
