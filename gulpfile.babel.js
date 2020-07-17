@@ -22,6 +22,7 @@ const bs = browserSync.create();
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import tailwindcss from 'tailwindcss';
+import atImport from 'postcss-import';
 
 
 // Input paths
@@ -79,6 +80,7 @@ function css() {
   return src(paths.src + paths.css)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.postcss([
+      atImport(),
       tailwindcss('./tailwind.js'),
       autoprefixer()
     ]))
