@@ -11,6 +11,7 @@
 // Base
 //
 
+@tailwind base;
 @import 'base.page';
 
 
@@ -18,4 +19,12 @@
 // Components
 //
 
+@tailwind components;
 @import 'components.btn';
+
+
+//
+// Utilities
+//
+
+@tailwind utilities;
