@@ -4,25 +4,14 @@
 
 /**
  * 1. Improved default box model - http://goo.gl/3ed2H
- * 2. Content should fill entire browser window.
- * 3. Force scrollbars on all browsers.
  */
 
 html {
   box-sizing: border-box; /* [1] */
-  color: palette(dark);
-  font: #{$base-font-size}/#{$base-line-height} $base-font-family;
-  height: 100%; /* [2] */
-  overflow-y: scroll; /* [3] */
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit; /* [1] */
-}
-
-body {
-  background-color: palette(light);
-  min-height: 100%; /* [3] */
 }
