@@ -1485,11 +1485,6 @@ braces@^3.0.1, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-brand-colors@^2.0.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/brand-colors/-/brand-colors-2.1.1.tgz#47be3854ad4ffa6c494750a5e79646ecfb68b58d"
-  integrity sha512-O5pmBXZYtQlWVR0Xl4hdU3aRSs9RkNoKcx6pmQVnXW1GyQLIZaHDKbTEAQNNwuczPiXymjbcDOUBz3sKy5ZL/Q==
-
 breakpoint-sass@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/breakpoint-sass/-/breakpoint-sass-2.7.1.tgz#8ef6c4744dcc25ba83d969b6c9a17e5daa29980a"
