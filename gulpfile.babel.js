@@ -32,7 +32,6 @@ const paths = {
   tmp: './.tmp/',
   dist: './dist/',
   html: '**/*.html',
-  twig: '**/*.html.twig',
   css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
   img: 'img/**/*.+(png|jpg|svg|gif)',
@@ -46,18 +45,6 @@ const paths = {
 /*------------------------------------*\
   #HTML
 \*------------------------------------*/
-
-// Render Twig templates
-
-function twig() {
-  return src(paths.src + paths.twig)
-    .pipe(plugins.twig({
-      errorLogToConsole: true,
-      extname: false
-    }))
-    .pipe(dest(paths.dist))
-};
-
 
 // Copy HTML
 
