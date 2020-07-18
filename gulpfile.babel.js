@@ -115,7 +115,7 @@ const minifyCSS = series(compileCSS, function () {
 
 // Copy images
 
-function img() {
+function copyImg() {
   return src(paths.src + paths.img)
     .pipe(plugins.newer(paths.dist + paths.img))
     .pipe(dest(paths.dist + 'img/'))
@@ -162,7 +162,7 @@ function font() {
 
 // Create servera and watch files
 
-export const serve = series(parallel(compileCSS, copyRootFiles, twig, img, font), function serve() {
+export const serve = series(parallel(compileCSS, copyRootFiles, twig, copyImg, font), function serve() {
   bs.init({
     browser: 'opera',
     server: {
@@ -207,7 +207,7 @@ export const compile = parallel(
   compileCSS,
   copyRootFiles,
   twig,
-  img,
+  copyImg,
   font
 )
 
