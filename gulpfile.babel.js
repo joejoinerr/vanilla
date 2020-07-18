@@ -124,7 +124,7 @@ function copyImg() {
 
 // Minify images
 
-const imgdist = series(img, function imgdist() {
+const compressImg = series(img, function () {
   const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
@@ -214,7 +214,7 @@ export const compile = parallel(
 
 // Compile for production and version files
 
-export const dist = series(parallel(minifyCSS, copyRootFiles, imgdist, font), function dist() {
+export const dist = series(parallel(minifyCSS, copyRootFiles, compressImg, font), function dist() {
   const manifest = src(paths.dist + 'rev-manifest.json')
 
   return src(paths.dist + paths.html)
