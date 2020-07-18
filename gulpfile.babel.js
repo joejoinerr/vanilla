@@ -68,15 +68,15 @@ function copyRootFiles() {
 // Compile CSS
 
 function compileCSS() {
-  return src(paths.src + paths.css)
-    .pipe(plugins.sourcemaps.init())
+  return src(paths.src + paths.css, { sourcemaps: true })
     .pipe(plugins.postcss([
       atImport(),
       tailwindcss(),
       autoprefixer()
     ]))
-    .pipe(plugins.sourcemaps.write('./maps'))
-    .pipe(dest(paths.dist + 'css/'))
+    .pipe(dest(paths.dist + 'css/', {
+      sourcemaps: './maps'
+    }))
     .pipe(browserSync.stream())
 };
 
