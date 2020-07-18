@@ -195,13 +195,6 @@ export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFon
   #MAINTENANCE
 \*------------------------------------*/
 
-export const bump = function () {
-  return src('./package.json')
-    .pipe(plugins.bump({ version: '3.0.0' }))
-    .pipe(dest('./'))
-};
-
-
 // Update revved filenames
 
 function rewrite() {
