@@ -160,9 +160,9 @@ function copyFont() {
   #SERVER
 \*------------------------------------*/
 
-// Create servera and watch files
+// Create server and watch files
 
-export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function serve() {
+export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function () {
   bs.init({
     browser: 'opera',
     server: {
@@ -186,7 +186,7 @@ export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFon
   #MAINTENANCE
 \*------------------------------------*/
 
-export const bump = () => {
+export const bump = function () {
   return src('./package.json')
     .pipe(plugins.bump({ version: '3.0.0' }))
     .pipe(dest('./'))
@@ -212,7 +212,7 @@ export const compile = parallel(
 
 // Compile for production and version files
 
-export const dist = series(parallel(minifyCSS, copyRootFiles, compressImg, font), function dist() {
+export const dist = series(parallel(minifyCSS, copyRootFiles, compressImg, font), function () {
   const manifest = src(paths.dist + 'rev-manifest.json')
 
   return src(paths.dist + paths.html)
