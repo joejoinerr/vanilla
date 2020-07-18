@@ -124,7 +124,7 @@ function copyImg() {
 
 // Minify images
 
-const compressImg = series(img, function () {
+function compressImg() {
   const imageminPlugins = [
     plugins.imagemin.jpegtran({ progressive: true }),
     plugins.imagemin.gifsicle({ interlaced: true }),
@@ -137,7 +137,7 @@ const compressImg = series(img, function () {
     // .pipe(plugins.webp())
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
     .pipe(dest(paths.dist + 'img/'))
-});
+};
 
 
 
@@ -217,7 +217,7 @@ export const dist =
     parallel(
       series(compileCSS, minifyCSS),
       copyRootFiles,
-      compressImg,
+      series(copyImg, compressImg),
       font
     ),
     function () {
