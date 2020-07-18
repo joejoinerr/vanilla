@@ -12,6 +12,7 @@
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.23.6",
     "cssnano": "^4.1.10",
+    "del": "^5.1.0",
     "gulp": "^4.0.0",
     "gulp-bump": "^3.0.0",
     "gulp-cached": "^1.1.1",

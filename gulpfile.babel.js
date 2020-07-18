@@ -23,6 +23,7 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import tailwindcss from 'tailwindcss';
 import atImport from 'postcss-import';
+import del from 'del';
 
 
 // Input paths
@@ -37,6 +38,22 @@ const paths = {
   img: 'img/**/*.+(png|jpg|svg|gif)',
   font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
 };
+
+
+
+
+
+/*------------------------------------*\
+  #CLEANUP
+\*------------------------------------*/
+
+// Remove previously compiled files
+
+function clean(cb) {
+  return del([
+    paths.dist
+  ], cb)
+}
 
 
 
@@ -206,24 +223,25 @@ function rewrite() {
 // Temporary compile
 
 export const compile = series(
+  clean,
   parallel(
     compileCSS,
     copyRootFiles,
     copyImg,
     copyFont
   )
-)
+);
 
 
 // Compile for production and version files
 
-export const dist =
-  series(
-    parallel(
-      series(compileCSS, minifyCSS),
-      copyRootFiles,
-      series(copyImg, compressImg),
-      copyFont
-    ),
-    rewrite
-  );
+export const dist = series(
+  clean,
+  parallel(
+    series(compileCSS, minifyCSS),
+    copyRootFiles,
+    series(copyImg, compressImg),
+    copyFont
+  ),
+  rewrite
+);
