@@ -82,7 +82,7 @@ function compileCSS() {
 
 // Minify CSS
 
-const minifyCSS = series(compileCSS, function () {
+function minifyCSS() {
   return src(paths.dist + paths.css)
     .pipe(plugins.purgecss({
       content: ['dist/**/*.html'],
@@ -103,7 +103,7 @@ const minifyCSS = series(compileCSS, function () {
       merge: true
     }))
     .pipe(dest(paths.dist + 'css/'))
-});
+};
 
 
 
@@ -212,13 +212,22 @@ export const compile = parallel(
 
 // Compile for production and version files
 
-export const dist = series(parallel(minifyCSS, copyRootFiles, compressImg, font), function () {
-  const manifest = src(paths.dist + 'rev-manifest.json')
+export const dist =
+  series(
+    parallel(
+      series(compileCSS, minifyCSS),
+      copyRootFiles,
+      compressImg,
+      font
+    ),
+    function () {
+      const manifest = src(paths.dist + 'rev-manifest.json')
 
-  return src(paths.dist + paths.html)
-    .pipe(plugins.revReplace({
-      manifest: manifest,
-      replaceInExtensions: ['.html']
-    }))
-    .pipe(dest(paths.dist))
-});
+      return src(paths.dist + paths.html)
+        .pipe(plugins.revReplace({
+          manifest: manifest,
+          replaceInExtensions: ['.html']
+        }))
+        .pipe(dest(paths.dist))
+    }
+  );
