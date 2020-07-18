@@ -43,13 +43,16 @@ const paths = {
 
 
 /*------------------------------------*\
-  #HTML
+  #ROOT FILES
 \*------------------------------------*/
 
-// Copy HTML
+// Copy HTML and other root files
 
-function html() {
-  return src([paths.src + paths.html, paths.src + "*.*"])
+function copyRootFiles() {
+  return src([
+      paths.src + paths.html,
+      paths.src + "robots.txt"
+    ])
     .pipe(dest(paths.dist))
 };
 
@@ -159,7 +162,7 @@ function font() {
 
 // Create servera and watch files
 
-export const serve = series(parallel(css, html, twig, img, font), function serve() {
+export const serve = series(parallel(css, copyRootFiles, twig, img, font), function serve() {
   bs.init({
     browser: 'opera',
     server: {
@@ -171,7 +174,7 @@ export const serve = series(parallel(css, html, twig, img, font), function serve
   });
 
   watch(paths.src + paths.css, css);
-  watch(paths.src + paths.html, html);
+  watch(paths.src + paths.html, copyRootFiles);
   watch(paths.src + paths.twig, twig);
   watch(paths.dist + paths.html).on('change', bs.reload);
 });
@@ -200,12 +203,12 @@ export const bump = () => {
 
 // Temporary compile
 
-export const compile = parallel(css, html, twig, img, font)
+export const compile = parallel(css, copyRootFiles, twig, img, font)
 
 
 // Compile for production and version files
 
-export const dist = series(parallel(cssdist, html, imgdist, font), function dist() {
+export const dist = series(parallel(cssdist, copyRootFiles, imgdist, font), function dist() {
   const manifest = src(paths.dist + 'rev-manifest.json')
 
   return src(paths.dist + paths.html)
