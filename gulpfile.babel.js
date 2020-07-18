@@ -162,7 +162,7 @@ function font() {
 
 // Create servera and watch files
 
-export const serve = series(parallel(compileCSS, copyRootFiles, twig, copyImg, font), function serve() {
+export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, font), function serve() {
   bs.init({
     browser: 'opera',
     server: {
@@ -175,7 +175,6 @@ export const serve = series(parallel(compileCSS, copyRootFiles, twig, copyImg, f
 
   watch(paths.src + paths.css, compileCSS);
   watch(paths.src + paths.html, copyRootFiles);
-  watch(paths.src + paths.twig, twig);
   watch(paths.dist + paths.html).on('change', bs.reload);
 });
 
@@ -206,7 +205,6 @@ export const bump = () => {
 export const compile = parallel(
   compileCSS,
   copyRootFiles,
-  twig,
   copyImg,
   font
 )
