@@ -185,6 +185,17 @@ export const bump = function () {
 };
 
 
+// Update revved filenames
+
+function rewrite() {
+  const manifest = src(paths.dist + 'rev-manifest.json')
+
+  return src(paths.dist + paths.html)
+    .pipe(plugins.revRewrite({ manifest }))
+    .pipe(dest(paths.dist))
+}
+
+
 
 
 
@@ -214,14 +225,5 @@ export const dist =
       series(copyImg, compressImg),
       copyFont
     ),
-    function () {
-      const manifest = src(paths.dist + 'rev-manifest.json')
-
-      return src(paths.dist + paths.html)
-        .pipe(plugins.revReplace({
-          manifest: manifest,
-          replaceInExtensions: ['.html']
-        }))
-        .pipe(dest(paths.dist))
-    }
+    rewrite
   );
