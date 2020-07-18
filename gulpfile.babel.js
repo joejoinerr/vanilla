@@ -44,22 +44,6 @@ const paths = {
 
 
 /*------------------------------------*\
-  #CLEANUP
-\*------------------------------------*/
-
-// Remove previously compiled files
-
-function clean(cb) {
-  return del([
-    paths.dist
-  ], cb)
-}
-
-
-
-
-
-/*------------------------------------*\
   #ROOT FILES
 \*------------------------------------*/
 
@@ -168,6 +152,15 @@ function copyFont() {
 /*------------------------------------*\
   #MAINTENANCE
 \*------------------------------------*/
+
+// Remove previously compiled files
+
+function clean(cb) {
+  return del([
+    paths.dist
+  ], cb)
+}
+
 
 // Update revved filenames
 
