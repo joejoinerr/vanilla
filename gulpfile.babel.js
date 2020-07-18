@@ -166,32 +166,6 @@ function copyFont() {
 
 
 /*------------------------------------*\
-  #SERVER
-\*------------------------------------*/
-
-// Create server and watch files
-
-export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function () {
-  bs.init({
-    browser: 'opera',
-    server: {
-      baseDir: paths.dist,
-      routes: {
-        '/vendor': './node_modules'
-      }
-    }
-  });
-
-  watch(paths.src + paths.css, compileCSS);
-  watch(paths.src + paths.html, copyRootFiles);
-  watch(paths.dist + paths.html).on('change', bs.reload);
-});
-
-
-
-
-
-/*------------------------------------*\
   #MAINTENANCE
 \*------------------------------------*/
 
@@ -210,7 +184,7 @@ function rewrite() {
 
 
 /*------------------------------------*\
-  #SCRIPT GROUPS
+  #TASKS
 \*------------------------------------*/
 
 // Temporary compile
@@ -224,6 +198,25 @@ export const compile = series(
     copyFont
   )
 );
+
+
+// Create server and watch files
+
+export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function () {
+  bs.init({
+    browser: 'opera',
+    server: {
+      baseDir: paths.dist,
+      routes: {
+        '/vendor': './node_modules'
+      }
+    }
+  });
+
+  watch(paths.src + paths.css, compileCSS);
+  watch(paths.src + paths.html, copyRootFiles);
+  watch(paths.dist + paths.html).on('change', bs.reload);
+});
 
 
 // Compile for production and version files
