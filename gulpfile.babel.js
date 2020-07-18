@@ -84,17 +84,6 @@ function compileCSS() {
 
 function minifyCSS() {
   return src(paths.dist + paths.css)
-    .pipe(plugins.purgecss({
-      content: ['dist/**/*.html'],
-      extractors: [{
-        extractor: class {
-          static extract(content) {
-            return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
-          }
-        },
-        extensions: ['html']
-      }]
-    }))
     .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
     .pipe(dest(paths.dist + 'css/'))
