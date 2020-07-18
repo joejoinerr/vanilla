@@ -196,6 +196,13 @@ export const bump = function () {
 };
 
 
+// Set NODE_ENV
+
+function setNodeEnv(env) {
+  return process.env.NODE_ENV = env || 'development'
+}
+
+
 
 
 
@@ -205,11 +212,14 @@ export const bump = function () {
 
 // Temporary compile
 
-export const compile = parallel(
-  compileCSS,
-  copyRootFiles,
-  copyImg,
-  copyFont
+export const compile = series(
+  setNodeEnv,
+  parallel(
+    compileCSS,
+    copyRootFiles,
+    copyImg,
+    copyFont
+  )
 )
 
 
@@ -217,6 +227,7 @@ export const compile = parallel(
 
 export const dist =
   series(
+    setNodeEnv('production')
     parallel(
       series(compileCSS, minifyCSS),
       copyRootFiles,
