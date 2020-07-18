@@ -66,7 +66,7 @@ function copyRootFiles() {
 
 // Compile CSS
 
-function css() {
+function compileCSS() {
   return src(paths.src + paths.css)
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.postcss([
@@ -82,7 +82,7 @@ function css() {
 
 // Minify CSS
 
-const cssdist = series(css, function cssdist() {
+const minifyCSS = series(css, function () {
   return src(paths.dist + paths.css)
     .pipe(plugins.purgecss({
       content: ['dist/**/*.html'],
@@ -162,7 +162,7 @@ function font() {
 
 // Create servera and watch files
 
-export const serve = series(parallel(css, copyRootFiles, twig, img, font), function serve() {
+export const serve = series(parallel(compileCSS, copyRootFiles, twig, img, font), function serve() {
   bs.init({
     browser: 'opera',
     server: {
@@ -173,7 +173,7 @@ export const serve = series(parallel(css, copyRootFiles, twig, img, font), funct
     }
   });
 
-  watch(paths.src + paths.css, css);
+  watch(paths.src + paths.css, compileCSS);
   watch(paths.src + paths.html, copyRootFiles);
   watch(paths.src + paths.twig, twig);
   watch(paths.dist + paths.html).on('change', bs.reload);
@@ -203,7 +203,13 @@ export const bump = () => {
 
 // Temporary compile
 
-export const compile = parallel(css, copyRootFiles, twig, img, font)
+export const compile = parallel(
+  compileCSS,
+  copyRootFiles,
+  twig,
+  img,
+  font
+)
 
 
 // Compile for production and version files
