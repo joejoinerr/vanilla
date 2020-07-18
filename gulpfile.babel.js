@@ -82,7 +82,7 @@ function compileCSS() {
 
 // Minify CSS
 
-const minifyCSS = series(css, function () {
+const minifyCSS = series(compileCSS, function () {
   return src(paths.dist + paths.css)
     .pipe(plugins.purgecss({
       content: ['dist/**/*.html'],
@@ -214,7 +214,7 @@ export const compile = parallel(
 
 // Compile for production and version files
 
-export const dist = series(parallel(cssdist, copyRootFiles, imgdist, font), function dist() {
+export const dist = series(parallel(minifyCSS, copyRootFiles, imgdist, font), function dist() {
   const manifest = src(paths.dist + 'rev-manifest.json')
 
   return src(paths.dist + paths.html)
