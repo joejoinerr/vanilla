@@ -218,7 +218,7 @@ export const dist =
       series(compileCSS, minifyCSS),
       copyRootFiles,
       series(copyImg, compressImg),
-      font
+      copyFont
     ),
     function () {
       const manifest = src(paths.dist + 'rev-manifest.json')
