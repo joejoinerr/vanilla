@@ -126,7 +126,10 @@ function copyImg() {
 
 function compressImg() {
   const imageminPlugins = [
-    plugins.imagemin.jpegtran({ progressive: true }),
+    plugins.imagemin.mozjpeg({
+      quality: 80,
+      progressive: true
+    }),
     plugins.imagemin.gifsicle({ interlaced: true }),
     plugins.imagemin.svgo(),
     pngquant()
