@@ -147,7 +147,7 @@ const compressImg = series(img, function () {
   #FONTS
 \*------------------------------------*/
 
-function font() {
+function copyFont() {
   return src(paths.src + paths.font)
     .pipe(dest(paths.dist + 'font/'))
 };
@@ -162,7 +162,7 @@ function font() {
 
 // Create servera and watch files
 
-export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, font), function serve() {
+export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function serve() {
   bs.init({
     browser: 'opera',
     server: {
@@ -206,7 +206,7 @@ export const compile = parallel(
   compileCSS,
   copyRootFiles,
   copyImg,
-  font
+  copyFont
 )
 
 
