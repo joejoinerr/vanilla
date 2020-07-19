@@ -216,12 +216,7 @@ export const compile = series(
 // Create server and watch files
 
 export const serve = series(
-  parallel(
-    compileCSS,
-    copyRootFiles,
-    copyImg,
-    copyFont
-  ),
+  compile,
   startServer
 );
 
