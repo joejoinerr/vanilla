@@ -35,7 +35,7 @@ const paths = {
   html: '**/*.html',
   css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
-  img: 'img/**/*.+(png|jpg|svg|gif)',
+  img: 'img/**/*.+(png|jpg|jpeg|svg|gif)',
   font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
 };
 
