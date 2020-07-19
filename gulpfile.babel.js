@@ -173,6 +173,22 @@ function rewrite() {
 }
 
 
+// Start BrowserSync server
+
+function startServer() {
+  bs.init({
+    browser: [],
+    server: {
+      baseDir: paths.dist
+    }
+  });
+
+  watch(paths.src + paths.css, compileCSS);
+  watch(paths.src + paths.html, copyRootFiles);
+  watch(paths.dist + paths.html).on('change', bs.reload);
+}
+
+
 
 
 
@@ -195,21 +211,15 @@ export const compile = series(
 
 // Create server and watch files
 
-export const serve = series(parallel(compileCSS, copyRootFiles, copyImg, copyFont), function () {
-  bs.init({
-    browser: 'opera',
-    server: {
-      baseDir: paths.dist,
-      routes: {
-        '/vendor': './node_modules'
-      }
-    }
-  });
-
-  watch(paths.src + paths.css, compileCSS);
-  watch(paths.src + paths.html, copyRootFiles);
-  watch(paths.dist + paths.html).on('change', bs.reload);
-});
+export const serve = series(
+  parallel(
+    compileCSS,
+    copyRootFiles,
+    copyImg,
+    copyFont
+  ),
+  startServer
+);
 
 
 // Compile for production and version files
