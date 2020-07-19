@@ -30,7 +30,6 @@ import del from 'del';
 
 const paths = {
   src: './src/',
-  tmp: './.tmp/',
   dist: './dist/',
   html: '**/*.html',
   css: 'css/**/[!_]*.css',
