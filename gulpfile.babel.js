@@ -23,19 +23,19 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import tailwindcss from 'tailwindcss';
 import atImport from 'postcss-import';
+import del from 'del';
 
 
 // Input paths
 
 const paths = {
   src: './src/',
-  tmp: './.tmp/',
   dist: './dist/',
   html: '**/*.html',
-  twig: '**/*.html.twig',
+  twig: '**/*.twig'
   css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
-  img: 'img/**/*.+(png|jpg|svg|gif)',
+  img: 'img/**/*.+(png|jpg|jpeg|svg|gif)',
   font: 'font/**/*.+(woff|woff2|eot|svg|ttf|otf)'
 };
 
@@ -44,25 +44,16 @@ const paths = {
 
 
 /*------------------------------------*\
-  #HTML
+  #ROOT FILES
 \*------------------------------------*/
 
-// Render Twig templates
+// Copy HTML and other root files
 
-function twig() {
-  return src(paths.src + paths.twig)
-    .pipe(plugins.twig({
-      errorLogToConsole: true,
-      extname: false
-    }))
-    .pipe(dest(paths.dist))
-};
-
-
-// Copy HTML
-
-function html() {
-  return src([paths.src + paths.html, paths.src + "*.*"])
+function copyRootFiles() {
+  return src([
+      paths.src + paths.html,
+      paths.src + "robots.txt"
+    ])
     .pipe(dest(paths.dist))
 };
 
@@ -76,35 +67,24 @@ function html() {
 
 // Compile CSS
 
-function css() {
-  return src(paths.src + paths.css)
-    .pipe(plugins.sourcemaps.init())
+function compileCSS() {
+  return src(paths.src + paths.css, { sourcemaps: true })
     .pipe(plugins.postcss([
       atImport(),
       tailwindcss(),
       autoprefixer()
     ]))
-    .pipe(plugins.sourcemaps.write('./maps'))
-    .pipe(dest(paths.dist + 'css/'))
+    .pipe(dest(paths.dist + 'css/', {
+      sourcemaps: './maps'
+    }))
     .pipe(browserSync.stream())
 };
 
 
 // Minify CSS
 
-const cssdist = series(css, function cssdist() {
+function minifyCSS() {
   return src(paths.dist + paths.css)
-    .pipe(plugins.purgecss({
-      content: ['dist/**/*.html'],
-      extractors: [{
-        extractor: class {
-          static extract(content) {
-            return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
-          }
-        },
-        extensions: ['html']
-      }]
-    }))
     .pipe(plugins.postcss([cssnano()]))
     .pipe(plugins.rev())
     .pipe(dest(paths.dist + 'css/'))
@@ -113,7 +93,7 @@ const cssdist = series(css, function cssdist() {
       merge: true
     }))
     .pipe(dest(paths.dist + 'css/'))
-});
+};
 
 
 
@@ -125,7 +105,7 @@ const cssdist = series(css, function cssdist() {
 
 // Copy images
 
-function img() {
+function copyImg() {
   return src(paths.src + paths.img)
     .pipe(plugins.newer(paths.dist + paths.img))
     .pipe(dest(paths.dist + 'img/'))
@@ -134,9 +114,12 @@ function img() {
 
 // Minify images
 
-const imgdist = series(img, function imgdist() {
+function compressImg() {
   const imageminPlugins = [
-    plugins.imagemin.jpegtran({ progressive: true }),
+    plugins.imagemin.mozjpeg({
+      quality: 80,
+      progressive: true
+    }),
     plugins.imagemin.gifsicle({ interlaced: true }),
     plugins.imagemin.svgo(),
     pngquant()
@@ -147,7 +130,7 @@ const imgdist = series(img, function imgdist() {
     // .pipe(plugins.webp())
     .pipe(plugins.imagemin(imageminPlugins, { verbose: true }))
     .pipe(dest(paths.dist + 'img/'))
-});
+};
 
 
 
@@ -157,7 +140,7 @@ const imgdist = series(img, function imgdist() {
   #FONTS
 \*------------------------------------*/
 
-function font() {
+function copyFont() {
   return src(paths.src + paths.font)
     .pipe(dest(paths.dist + 'font/'))
 };
@@ -167,40 +150,46 @@ function font() {
 
 
 /*------------------------------------*\
-  #SERVER
-\*------------------------------------*/
-
-// Create servera and watch files
-
-export const serve = series(parallel(css, html, twig, img, font), function serve() {
-  bs.init({
-    browser: 'opera',
-    server: {
-      baseDir: paths.dist,
-      routes: {
-        '/vendor': './node_modules'
-      }
-    }
-  });
-
-  watch(paths.src + paths.css, css);
-  watch(paths.src + paths.html, html);
-  watch(paths.src + paths.twig, twig);
-  watch(paths.dist + paths.html).on('change', bs.reload);
-});
-
-
-
-
-
-/*------------------------------------*\
   #MAINTENANCE
 \*------------------------------------*/
 
-export const bump = () => {
-  return src('./package.json')
-    .pipe(plugins.bump({ version: '3.0.0' }))
-    .pipe(dest('./'))
+// Remove previously compiled files
+
+function clean(cb) {
+  return del([
+    paths.dist
+  ], cb)
+};
+
+
+// Update revved filenames
+
+function rewrite() {
+  const manifest = src(paths.dist + 'rev-manifest.json')
+
+  return src([
+      paths.dist + paths.html,
+      paths.dist + paths.twig
+    ])
+    .pipe(plugins.revRewrite({ manifest }))
+    .pipe(dest(paths.dist))
+};
+
+
+// Start BrowserSync server
+
+function startServer() {
+  bs.init({
+    browser: [],
+    server: {
+      baseDir: paths.dist
+    }
+  });
+
+  watch(paths.src + paths.css, compileCSS);
+  watch(paths.src + paths.html, copyRootFiles);
+  watch(pathc.src + paths.img, copyImg);
+  watch(paths.dist + paths.html).on('change', bs.reload);
 };
 
 
@@ -208,23 +197,44 @@ export const bump = () => {
 
 
 /*------------------------------------*\
-  #SCRIPT GROUPS
+  #TASKS
 \*------------------------------------*/
 
 // Temporary compile
 
-export const compile = parallel(css, html, twig, img, font)
+export const compile = series(
+  clean,
+  parallel(
+    compileCSS,
+    copyRootFiles,
+    copyImg,
+    copyFont
+  )
+);
+
+
+// Create server and watch files
+
+export const serve = series(
+  parallel(
+    compileCSS,
+    copyRootFiles,
+    copyImg,
+    copyFont
+  ),
+  startServer
+);
 
 
 // Compile for production and version files
 
-export const dist = series(parallel(cssdist, html, imgdist, font), function dist() {
-  const manifest = src(paths.dist + 'rev-manifest.json')
-
-  return src(paths.dist + paths.html)
-    .pipe(plugins.revReplace({
-      manifest: manifest,
-      replaceInExtensions: ['.html']
-    }))
-    .pipe(dest(paths.dist))
-});
+export const dist = series(
+  clean,
+  parallel(
+    series(compileCSS, minifyCSS),
+    copyRootFiles,
+    series(copyImg, compressImg),
+    copyFont
+  ),
+  rewrite
+);
