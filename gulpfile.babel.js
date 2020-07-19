@@ -32,6 +32,7 @@ const paths = {
   src: './src/',
   dist: './dist/',
   html: '**/*.html',
+  twig: '**/*.twig'
   css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
   img: 'img/**/*.+(png|jpg|jpeg|svg|gif)',
@@ -166,7 +167,10 @@ function clean(cb) {
 function rewrite() {
   const manifest = src(paths.dist + 'rev-manifest.json')
 
-  return src(paths.dist + paths.html)
+  return src([
+      paths.dist + paths.html,
+      paths.dist + paths.twig
+    ])
     .pipe(plugins.revRewrite({ manifest }))
     .pipe(dest(paths.dist))
 };
