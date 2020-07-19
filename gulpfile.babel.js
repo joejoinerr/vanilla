@@ -185,6 +185,7 @@ function startServer() {
 
   watch(paths.src + paths.css, compileCSS);
   watch(paths.src + paths.html, copyRootFiles);
+  watch(pathc.src + paths.img, copyImg);
   watch(paths.dist + paths.html).on('change', bs.reload);
 }
 
