@@ -159,7 +159,7 @@ function clean(cb) {
   return del([
     paths.dist
   ], cb)
-}
+};
 
 
 // Update revved filenames
@@ -170,7 +170,7 @@ function rewrite() {
   return src(paths.dist + paths.html)
     .pipe(plugins.revRewrite({ manifest }))
     .pipe(dest(paths.dist))
-}
+};
 
 
 // Start BrowserSync server
@@ -187,7 +187,7 @@ function startServer() {
   watch(paths.src + paths.html, copyRootFiles);
   watch(pathc.src + paths.img, copyImg);
   watch(paths.dist + paths.html).on('change', bs.reload);
-}
+};
 
 
 
