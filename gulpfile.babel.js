@@ -32,7 +32,7 @@ const paths = {
   src: './src/',
   dist: './dist/',
   html: '**/*.html',
-  twig: '**/*.twig'
+  twig: '**/*.twig',
   css: 'css/**/[!_]*.css',
   js: 'js/**/*.js',
   img: 'img/**/*.+(png|jpg|jpeg|svg|gif)',
