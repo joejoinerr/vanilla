@@ -9,9 +9,16 @@ pids
 *.seed
 
 
-# Dependency directory
+# Dependency directories
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 
 # Sass
@@ -19,17 +26,10 @@ node_modules
 *.css.map
 
 
-# Bower
-bower_components
-.bower-cache
-.bower-registry
-.bower-tmp
-
-
 # macOS files
 .DS_Store
 
 
-# Build folders
+# Build folders
 .tmp
 dist
