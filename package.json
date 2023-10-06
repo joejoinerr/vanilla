@@ -29,6 +29,6 @@
   "license": "MIT",
   "packageManager": "yarn@3.2.1",
   "dependencies": {
-    "postcss": "^8.4.14"
+    "postcss": "^8.4.31"
   }
 }
